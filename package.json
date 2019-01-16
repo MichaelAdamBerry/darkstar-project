@@ -1,0 +1,22 @@
+{
+  "name": "darkstar-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelAdamBerry/darkstar-project.git"
+  },
+  "author": "Michael Adam Berry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelAdamBerry/darkstar-project/issues"
+  },
+  "homepage": "https://github.com/MichaelAdamBerry/darkstar-project#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}

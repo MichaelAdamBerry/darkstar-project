@@ -6,27 +6,34 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <video autoplay muted loop id="myVideo">
+      <source
+        src="https://gcs-vimeo.akamaized.net/exp=1547688703~acl=%2A%2F1067679681.mp4%2A~hmac=6b6df45dc79c8aa9ed297424f086c6c7d978a7144b6b3bf87c2c8115baf2f14c/vimeo-prod-skyfire-std-us/01/1767/11/283838603/1067679681.mp4"
+        type="video/mp4"
+      />
+    </video>
     <div class="player">
       <video
+        autoplay
         class="player__video viewer"
         src="https://ia802803.us.archive.org/27/items/DeadCompanyWellsFargoCenter20171116DarkStar/Dead%20%26%20Company%20Wells%20Fargo%20Center%20%282017-11-16%29%20-%20Dark%20Star.mp4"
       ></video>
       <div class="player__controls">
-        <div class="progress"><div class="progress_filled"></div></div>
-        <button class="palyer__button toggle" title="Toggle Play">▶️</button>
+        <div class="progress"><div class="progress__filled"></div></div>
+        <button class="player__button toggle" title="Toggle Play">▶️</button>
         <input
           type="range"
           name="volume"
           class="player__slider"
-          min="0.5"
-          max="2"
+          min="0.0"
+          max="1"
           step="0.1"
-          value="1"
+          value=".5"
         />
         <button data-skip="-10" class="player__button">⏪</button>
         <button data-skip="25" class="player__button">⏩</button>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
