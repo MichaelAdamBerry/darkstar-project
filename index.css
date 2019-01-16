@@ -14,6 +14,15 @@ body {
   min-height: 100%;
 }
 
+.title {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  padding: 20px;
+}
+
 .player {
   max-width: 750px;
   border: 5px solid rgba(0, 0, 0, 0.2);
