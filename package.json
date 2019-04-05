@@ -18,5 +18,10 @@
   "homepage": "https://github.com/MichaelAdamBerry/darkstar-project#readme",
   "devDependencies": {
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "d3": "^5.9.2",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.3.0"
   }
 }
