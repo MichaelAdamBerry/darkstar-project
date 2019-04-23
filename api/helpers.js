@@ -45,9 +45,7 @@ module.exports = {
   getPlaysBySongandYear: (year, song) => {
     const { setlists } = gratefulSetlist;
     //filters all sets by year
-    const filteredByYear = setlists.filter(el => {
-      return moment(el.eventDate).isSame(moment(year));
-    });
+
     //reduces sets to value of times played
     const plays = filteredByYear.reduce((acc, cur, indx) => {
       let songTitlesArr = getSetArrFromSetObj(cur);

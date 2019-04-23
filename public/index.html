@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Grateful Data</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"></script>
+  </head>
+  <body>
+    
+    <div class="title"><h3>The Dark Star Project</h3></div>
+
+    <div id="container">
+      <div class="fixed" >
+        <div class="active-year"></div>
+        <svg id="bubbleChart"></svg>
+        <div class="inactive-container">
+        </div>
+        <div class="active-container">
+            <div class="active-title"></div>
+            </div>
+        </div>
+      </div> <!-- graph -->
+      <div id="sections">
+        <div>
+            <h2>Career Song totals</h4>
+            <h4>Over the course of thier thirty year career, The Grateful Dead 
+            played 2,327 live concerts performing 434 unique songs.
+            </h4>
+            <p>Each bubble represents a unique song performed from 1965 - 1995</p>
+            <p>Hover over a bubble to see statistics for that song</p>
+        </div>
+
+        <div id="1965"></div>
+        <div class="unsetContent">
+                <h4>1965 : The Warlocks</h4>
+                <div class="articleImg">
+                    <img src="../images/1965.jpg" />
+                </div>
+                <p>The band that would become the Grateful Dead formed in 1965 when Bob Weir met Jerry Garcia
+                    in behind a music store in Palo Alto. 
+                </p>
+                <div class="flex">
+                    <div class="memberImg">
+                        <img src="images/bob.jpg">
+                    </div>
+                    <div class="memberImg">
+                        <img src="images/jerry.jpg" alt="jerry garcia headshot">
+                    </div>
+                </div>
+                
+                <p>Despite never playing the instrument, Phil Lesch, an avant garde  
+                    composition student was recuited to play bass. And Bill Kreutzman
+                    kept the beat. 
+                </p>
+                <div class="flex">
+                    <div class="memberImg">
+                        <img src="images/phil.jpg" alt="Phil Lesh Headshot">
+                    </div>
+                    <div class="memberImg">
+                        <img src="images/bill.jpg" alt="Bill Kreutzman Headshot">
+                    </div>
+                </div>
+                <p>Ron Mckennan, a blues singer appropriately refered to as PigPen 
+                    was the original front man and lead singer.</p>
+                <div class="flex">
+                    <div class="memberImg">
+                        <img src="images/pigpen.jpg" alt="PigPen Headshot">
+                    </div>
+                </div>
+                <p>Setlists from the early years are typically incomplete.
+                    They played covers of Chuck Berry, The Rolling Stones and called
+                    themselves The Warlocks.
+                </p>
+                <p>Discovering there was another band called the Warlocks, 
+                    a band based out of New York that would eventually become
+                    The Velvet Underground, they change their name to the Grateful Dead
+                    in December 1965.
+                </p>
+        </div>
+        
+        <div id="1966"></div>  
+        <div class="unsetContent">
+            <h3>1966</h3>
+            <div class="articleImg">
+                <img src="../images/1966.jpg" />
+            </div>
+            <p>They play as the house band for Ken Kesey's Acid Test 
+                happenings in San Fransisco and meet manager Rock Scully
+                and LSD chemist Owsley "Bear" Stanley, who would become
+                their patron, supplier of LSD, and sound engineer.
+            </p>
+      
+        </div>
+        <div id="1967">
+            <h3>1967</h3>
+            <div class="articleImg">
+                <img src="../images/1967.jpg"/>
+            </div>
+            <p>Drummer Micky Hart joins the band</p>
+        </div>
+        <div id="1968">
+            <h3>1968</h3>
+            <div class="articleImg">
+                <img src="../images/1968.jpg"/>
+            </div>
+            <p>Tom "TC" Constanten joins the band</p>
+        </div>
+        <div id="1969">
+            <h3>1969</h3>
+            <div class="articleImg">
+                <img src="../images/1969.jpg"/>
+                <p>Live Dead</p>
+                <p>Aoxomoxoa</p>
+            </div>
+        </div>
+        <div id="1970">
+            <h3>1970 : Dead Folk</h3>
+            <div class="articleImg">
+                <img src="../images/1970.jpg"/>
+            </div>
+            <p>Tom Constanten leaves the band</p>
+            <p>Working Man's Dead</p>
+            <p>American Beauty</p>
+            
+        </div>
+        <div id="1971">
+            <h3>1971</h3>
+            <div class="articleImg">
+                <img src="../images/1971.jpg"/>
+            </div>
+            <p>Micky Hart departs the band. Keith and Donna Godchaux join.
+            </p>
+        </div>
+        <div id="1972">
+            <h3>1972</h3>
+            <div class="articleImg">
+                <img src="../images/1972.png"/>
+            </div>
+            <p>Europe '72</p>
+        </div>
+        <div id="1973">
+            <h3>1973</h3>
+            <div class="articleImg">
+                <img src="../images/1973.png"/>
+            </div>
+            <p>Wake of the Flood</p>
+        </div>
+        <div id="1974">
+            <h3>1974</h3>
+            <div class="articleImg">
+                <img src="../images/1974.jpg"/>
+            </div>
+            <p>The Wall of Sound</p>
+            <p>From the Mars Hotel</p>
+            <p>Hiatus begins</p>
+        </div>
+        <div id="1975">
+            <h3>1975</h3>
+            <div class="articleImg">
+                <img src="../images/1975.jpg"/>
+            </div>
+            <p>Blues for Allah</p>
+        </div>
+        <div id="1976">
+            <h3>1976</h3>
+            <div class="articleImg">
+                <img src="../images/1976.jpg"/>
+            </div>
+            <p>Blues for Allah</p>
+            <p>Resume touring</p>
+        </div>
+        <div id="1977">
+            <h3>1977</h3>
+            <div class="articleImg">
+                <img src="../images/1977.jpg"/>
+            </div>
+            <p>Terrapin Station</p>
+        </div>
+        <div id="1978">
+            <h3>1978</h3>
+            <div class="articleImg">
+                <img src="../images/1978.jpg"/>
+            </div>
+        </div>
+        <div id="1979">
+            <h3>1979</h3>
+            <div class="articleImg">
+                <img src="../images/1979.jpg"/>
+            </div>
+            <p>Keith and Donna leave the band. Brent Mydland takes over on keys</p>
+        </div>
+        <div id="1980">
+            <h3>1980</h3>
+            <div class="articleImg">
+                <img src="../images/1980.jpg" />
+            </div>
+        </div>
+
+        <div id="1981">
+            <h3>1981</h3>
+            <div class="articleImg">
+                <img src="../images/1981.jpg"/>
+            </div>
+        </div>
+        <div id="1982">
+            <h3>1982</h3>
+            <div class="articleImg">
+                <img src="../images/1982.jpg"/>
+            </div>
+        </div>
+        <div id="1983">
+            <h3>1983</h3>
+            <div class="articleImg">
+                <img src="../images/1983.jpg"/>
+            </div>
+        </div>
+        <div id="1984">
+            <h3>1984</h3>
+            <div class="articleImg">
+                <img src="../images/1984.jpg"/>
+            </div>
+        </div>
+        <div id="1985">
+            <h3>1985</h3>
+            <div class="articleImg">
+                <img src="../images/1985.jpg"/>
+            </div>
+        </div>
+        <div id="1986">
+            <h3>1986</h3>
+            <div class="articleImg">
+                <img src="../images/1986.jpg"/>
+            </div>
+        </div>
+        <div id="1987">
+            <h3>1987</h3>
+            <div class="articleImg">
+                <img src="../images/1987.jpg"/>
+            </div>
+        </div>
+        <div id="1988">
+            <h3>1988</h3>
+            <div class="articleImg">
+                <img src="../images/1988.jpg"/>
+            </div>
+        </div>
+        <div id="1989">
+            <h3>1989</h3>
+            <div class="articleImg">
+                <img src="../images/1989.jpg"/>
+            </div>
+        </div>
+        <div id="1990">
+            <h3>1990</h3>
+            <div class="articleImg">
+                <img src="../images/1990.jpg"/>
+            </div>
+        </div>
+        <div id="1991">
+            <h3>1991</h3>
+            <div class="articleImg">
+                <img src="../images/1991.jpg"/>
+            </div>
+        </div>
+        <div id="1992">
+            <h3>1992</h3>
+            <div class="articleImg">
+                <img src="../images/1992.jpg"/>
+            </div>
+        </div>
+        <div id="1993">
+            <h3>1993</h3>
+            <div class="articleImg">
+                <img src="../images/1993.jpg"/>
+            </div>
+        </div>
+        <div id="1994">
+            <h3>1994</h3>
+            <div class="articleImg">
+                <img src="../images/1994.jpg"/>
+            </div>
+        </div>
+        <div id="1995">
+            <h3>1995</h3>
+            <div class="articleImg">
+                <img src="../images/1995.jpg"/>
+            </div>
+        </div>
+    </div>
+</div>
+        
+
+      
+
+<!-- <script src="../noframework.waypoints.min.js"></script> -->
+<script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/helpers.js"></script>
+    <script type="module" src="./js/bubbleChart.js"></script>
+    <script type="module" src="./js/areaChart.js"></script>
+    <script type="module" src="./images/map/imgLib.js"></script>
+  </body>
+</html>

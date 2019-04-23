@@ -2,7 +2,7 @@
   "name": "darkstar-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "test"
   },
@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "d3": "^5.9.2",
+    "express": "^4.16.4",
     "moment": "^2.24.0",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "nodemon": "^1.18.11"
   }
 }

@@ -1,23 +1,19 @@
 const fs = require("fs");
 const gratefulSetlist = require("../data/gratefulSetlist");
 const careerTotals = require("../data/careerTotals");
+const totalsByYear = require("../data/totalsByYear");
 const helpers = require("./helpers.js");
 
-// ***    example of method to return an array of {song: <song>, count: <count>}
-// ***    of all songs played in 1972 sorted by count  *****
-
-//      const seventyTwoTotal = seventytwo.reduce((acc, cur) => {
-//     let setlist = helpers.getSetArrFromSetObj(cur);
-//     acc.push(...setlist);
-//     return acc;
-//   }, []);
-
-//const seventytwo = helpers.getSetsByYear("1972-01-01");
-//const seventyTwoSongCount = helpers.songsByFrequencyPlayed(seventyTwoTotal);
-//console.log(seventyTwoSongCount);
-
-//console.log("top 200 hundred songs ", careerTotals.splice(2, 202));
-let topOneFifty = careerTotals.slice(2, 152);
+//year should be type string, data totalsByYear
+const getAllSongDataByYear = (year, data) => {
+  let temp = data;
+  let val = temp.find(obj => {
+    return obj.year === year;
+  });
+  console.log(val);
+  console.log(`song data for ${year}`);
+  return val;
+};
 
 const getLastPlayedDate = song => {
   let found = gratefulSetlist.setlists.find(d => {
@@ -38,9 +34,12 @@ const getFirstPlayedDate = song => {
   return found === undefined ? "no song found" : found;
 };
 
-// const berthaPlays = helpers.getPlaysBySongandYear("1972-01-01", "Bertha");
-
-// console.log("Bertha Plays", berthaPlays);
+const getTotalShows = () => {
+  return gratefulSetlist.setlists.reduce((acc, curr, ind) => {
+    acc++;
+    return acc;
+  }, 0);
+};
 
 const filteredByYear = year => {
   return gratefulSetlist.setlists.filter(el => {
@@ -78,21 +77,12 @@ const counted = (arr, str) => {
   return obj;
 };
 
-// const sample = filteredByYear("1970");
-// const songArr = songs(sample);
-// const uniqueArr = uniqueSongs(songArr);
-// const darkstar = counted(songArr, "Dark Star");
-
-// console.log(uniqueArr);
-// console.log("unique songs in year", uniqueArr.length);
-// console.log(darkstar);
-
 const getYearSongData = year => {
   let data = filteredByYear(year);
   let songArr = songs(data);
   let uniqueArr = uniqueSongs(songArr);
-  console.log(uniqueArr);
-  console.log(`${uniqueArr.length} unique songs played in ${year}`);
+  // console.log(uniqueArr);
+  // console.log(`${uniqueArr.length} unique songs played in ${year}`);
   let yearObj = { year: year, songs: [], unique_songs: uniqueArr.length };
   uniqueArr.forEach(d => {
     let songObj = counted(songArr, d);
@@ -100,10 +90,6 @@ const getYearSongData = year => {
   });
   return yearObj;
 };
-
-//console.log(getYearSongData("1977"));
-
-//make array of yearObjects
 
 const getTotalsByYear = () => {
   let total = [];
@@ -115,4 +101,24 @@ const getTotalsByYear = () => {
   return total;
 };
 
-getTotalsByYear();
+const filterData = song => {
+  let temp = totalsByYear;
+  let val = [];
+  temp.forEach(obj => {
+    //each year make a new object
+    let songObj = {};
+    let tempCount = 0;
+    //add year  to object
+    songObj.year = obj.year;
+    //loop throught each object
+    obj.songs.forEach(title => {
+      //if song is found add count to obj
+      if (title.name === song) {
+        tempCount = title.count;
+      }
+    });
+    songObj.count = tempCount;
+    val.push(songObj);
+  });
+  return val;
+};
