@@ -10,6 +10,25 @@ const writeTotalPlays = () => {
     return acc;
   }, []);
 
+  const getLastPlayedDate = song => {
+    let found = gratefulSetlist.setlists.find(d => {
+      let arr = helpers.getSetArrFromSetObj(d);
+      return arr.includes(song);
+    });
+    return found === undefined ? "none" : found.eventDate;
+  };
+
+  const getFirstPlayedDate = song => {
+    let found = undefined;
+    gratefulSetlist.setlists.forEach(d => {
+      let arr = helpers.getSetArrFromSetObj(d);
+      if (arr.includes(song)) {
+        found = d.eventDate;
+      }
+    });
+    return found === undefined ? "no song found" : found;
+  };
+
   let careerTotals = helpers.songsByFrequencyPlayed(allSets);
   careerTotals = JSON.stringify(careerTotals, null, 2);
   fs.writeFile("careerTotals.json", careerTotals, err => {

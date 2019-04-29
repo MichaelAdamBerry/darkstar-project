@@ -1,5 +1,5 @@
 const fs = require("fs");
-const gratefulSetlist = require("../data/gratefulSetlist");
+const gratefulSetlist = require("../data/gratefulSetlist.json");
 const careerTotals = require("../data/careerTotals");
 const totalsByYear = require("../data/totalsByYear");
 const helpers = require("./helpers.js");
@@ -48,6 +48,8 @@ const filteredByYear = year => {
     return eventYear === year;
   });
 };
+
+//console.log(filteredByYear("1973"));
 
 const songs = sample => {
   let temp = [];
@@ -122,3 +124,5 @@ const filterData = song => {
   });
   return val;
 };
+
+console.log(filterData("1973"));
