@@ -4,301 +4,812 @@
     <meta charset="UTF-8" />
     <title>Grateful Data</title>
     <link rel="stylesheet" href="./css/index.css" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Roboto:500|Bungee+Inline|Bungee+Outline|Shadows+Into+Light" rel="stylesheet">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"></script>
   </head>
   <body>
-    
-    <div class="title"><h3>The Dark Star Project</h3></div>
-
-    <div id="container">
-      <div class="fixed" >
-        <div class="active-year"></div>
-        <svg id="bubbleChart"></svg>
-        <div class="inactive-container">
-        </div>
-        <div class="active-container">
-            <div class="active-title"></div>
-            </div>
-        </div>
-      </div> <!-- graph -->
-      <div id="sections">
-        <div>
-            <h2>Career Song totals</h4>
-            <h4>Over the course of thier thirty year career, The Grateful Dead 
-            played 2,327 live concerts performing 434 unique songs.
-            </h4>
-            <p>Each bubble represents a unique song performed from 1965 - 1995</p>
-            <p>Hover over a bubble to see statistics for that song</p>
-        </div>
-
-        <div id="1965"></div>
-        <div class="unsetContent">
-                <h4>1965 : The Warlocks</h4>
-                <div class="articleImg">
-                    <img src="../images/1965.jpg" />
-                </div>
-                <p>The band that would become the Grateful Dead formed in 1965 when Bob Weir met Jerry Garcia
-                    in behind a music store in Palo Alto. 
-                </p>
-                <div class="flex">
-                    <div class="memberImg">
-                        <img src="images/bob.jpg">
-                    </div>
-                    <div class="memberImg">
-                        <img src="images/jerry.jpg" alt="jerry garcia headshot">
-                    </div>
-                </div>
-                
-                <p>Despite never playing the instrument, Phil Lesch, an avant garde  
-                    composition student was recuited to play bass. And Bill Kreutzman
-                    kept the beat. 
-                </p>
-                <div class="flex">
-                    <div class="memberImg">
-                        <img src="images/phil.jpg" alt="Phil Lesh Headshot">
-                    </div>
-                    <div class="memberImg">
-                        <img src="images/bill.jpg" alt="Bill Kreutzman Headshot">
-                    </div>
-                </div>
-                <p>Ron Mckennan, a blues singer appropriately refered to as PigPen 
-                    was the original front man and lead singer.</p>
-                <div class="flex">
-                    <div class="memberImg">
-                        <img src="images/pigpen.jpg" alt="PigPen Headshot">
-                    </div>
-                </div>
-                <p>Setlists from the early years are typically incomplete.
-                    They played covers of Chuck Berry, The Rolling Stones and called
-                    themselves The Warlocks.
-                </p>
-                <p>Discovering there was another band called the Warlocks, 
-                    a band based out of New York that would eventually become
-                    The Velvet Underground, they change their name to the Grateful Dead
-                    in December 1965.
-                </p>
-        </div>
+        <div id="hero-container">
+    <div class="title bold">
+        <h3>GRATEFUL DATA</h3>
         
-        <div id="1966"></div>  
-        <div class="unsetContent">
-            <h3>1966</h3>
-            <div class="articleImg">
-                <img src="../images/1966.jpg" />
-            </div>
-            <p>They play as the house band for Ken Kesey's Acid Test 
-                happenings in San Fransisco and meet manager Rock Scully
-                and LSD chemist Owsley "Bear" Stanley, who would become
-                their patron, supplier of LSD, and sound engineer.
-            </p>
-      
-        </div>
-        <div id="1967">
-            <h3>1967</h3>
-            <div class="articleImg">
-                <img src="../images/1967.jpg"/>
-            </div>
-            <p>Drummer Micky Hart joins the band</p>
-        </div>
-        <div id="1968">
-            <h3>1968</h3>
-            <div class="articleImg">
-                <img src="../images/1968.jpg"/>
-            </div>
-            <p>Tom "TC" Constanten joins the band</p>
-        </div>
-        <div id="1969">
-            <h3>1969</h3>
-            <div class="articleImg">
-                <img src="../images/1969.jpg"/>
-                <p>Live Dead</p>
-                <p>Aoxomoxoa</p>
-            </div>
-        </div>
-        <div id="1970">
-            <h3>1970 : Dead Folk</h3>
-            <div class="articleImg">
-                <img src="../images/1970.jpg"/>
-            </div>
-            <p>Tom Constanten leaves the band</p>
-            <p>Working Man's Dead</p>
-            <p>American Beauty</p>
-            
-        </div>
-        <div id="1971">
-            <h3>1971</h3>
-            <div class="articleImg">
-                <img src="../images/1971.jpg"/>
-            </div>
-            <p>Micky Hart departs the band. Keith and Donna Godchaux join.
-            </p>
-        </div>
-        <div id="1972">
-            <h3>1972</h3>
-            <div class="articleImg">
-                <img src="../images/1972.png"/>
-            </div>
-            <p>Europe '72</p>
-        </div>
-        <div id="1973">
-            <h3>1973</h3>
-            <div class="articleImg">
-                <img src="../images/1973.png"/>
-            </div>
-            <p>Wake of the Flood</p>
-        </div>
-        <div id="1974">
-            <h3>1974</h3>
-            <div class="articleImg">
-                <img src="../images/1974.jpg"/>
-            </div>
-            <p>The Wall of Sound</p>
-            <p>From the Mars Hotel</p>
-            <p>Hiatus begins</p>
-        </div>
-        <div id="1975">
-            <h3>1975</h3>
-            <div class="articleImg">
-                <img src="../images/1975.jpg"/>
-            </div>
-            <p>Blues for Allah</p>
-        </div>
-        <div id="1976">
-            <h3>1976</h3>
-            <div class="articleImg">
-                <img src="../images/1976.jpg"/>
-            </div>
-            <p>Blues for Allah</p>
-            <p>Resume touring</p>
-        </div>
-        <div id="1977">
-            <h3>1977</h3>
-            <div class="articleImg">
-                <img src="../images/1977.jpg"/>
-            </div>
-            <p>Terrapin Station</p>
-        </div>
-        <div id="1978">
-            <h3>1978</h3>
-            <div class="articleImg">
-                <img src="../images/1978.jpg"/>
-            </div>
-        </div>
-        <div id="1979">
-            <h3>1979</h3>
-            <div class="articleImg">
-                <img src="../images/1979.jpg"/>
-            </div>
-            <p>Keith and Donna leave the band. Brent Mydland takes over on keys</p>
-        </div>
-        <div id="1980">
-            <h3>1980</h3>
-            <div class="articleImg">
-                <img src="../images/1980.jpg" />
-            </div>
-        </div>
+    </div>
+   
+        <!-- <div id="hero"></div> -->
+        <div class="full-height">
+            <div id="hero-text">
 
-        <div id="1981">
-            <h3>1981</h3>
-            <div class="articleImg">
-                <img src="../images/1981.jpg"/>
+                <h3>Exploring 30 Years of Setlist Data</h3>
+
             </div>
         </div>
-        <div id="1982">
-            <h3>1982</h3>
-            <div class="articleImg">
-                <img src="../images/1982.jpg"/>
+    </div>
+    <div class="career-container">
+            
+        <div class="explainer-text">
+            <div>
+                <h3>A Band Beyond Description</h3>
+                <p class="drop-letter">
+                        Even for die hard deadheads The Grateful Dead can be difficult to categorize. 
+                        For the uninitiated, the shear volume of recordings and songs is enough 
+                        to be scared away. As music critic  Tim Sommer sums up nicely: 
+                        “Loving the Grateful Dead is like ridin’ that train to Hogwarts—
+                        you must believe that the track exists in order to climb aboard.”
+                </p>
+                <p>
+                        These visualizations use data from archive.com and setlist.fm 
+                        to observe both total career setlist data as well as specific setlist 
+                        data for each year from 1965 - 1995, examining: 
+                            <ul>
+                                <li>
+                                    What songs were played the most.
+                                </li>
+                                <li>
+                                    The size of their repetoir - How many unique songs were played 
+                                </li> 
+                                <li>
+                                    When songs debuted. 
+                                </li>
+                                <li>
+                                    The make up of the setlist by primary lyricist and composer
+                                </li>
+                            </ul>
+                </p>
+                <div id="stealie"></div>
+                <ol>
+                    <li>
+                        <div id="1962" class="career-scroll">
+                            <div  class="career-radial-bar-container">
+                                <div id="career-radial-title">
+                                    <h3>Career Most Played Songs</h3>
+                                </div>
+                                <div id="career-radial-bar"></div>
+                            </div>
+                        </div>
+                        <div class="scroller-div"></div>
+                    </li>
+                    <li>
+                        <div id="1963" class="career-scroll">
+                            <div id="count-title-container">
+                                    <h3 id="count-title">Career Unique Songs played</h3>
+                            </div>
+                            
+                            <div id="year-count-container">
+                                    <div id="year-count"></div>
+                            </div>
+                            <div id="song-count-container">
+                                <div id="song-count"></div>
+                            </div>
+                            <div  class="career-chart-container">
+                                    
+                                    <svg id="career-chart" width="400" height="600"></svg>
+                            </div>
+                        </div>
+                        <div class="scroller-div"></div> 
+                    </li>
+                    <li>
+                        <div id="1964" class="career-scroll">
+                            <h3>Writers of Each Song</h3>
+                        </div>
+                        <div class="scroller-div"></div>
+
+
+                    </li>
+
+                </ol>
+                
             </div>
-        </div>
-        <div id="1983">
-            <h3>1983</h3>
-            <div class="articleImg">
-                <img src="../images/1983.jpg"/>
-            </div>
-        </div>
-        <div id="1984">
-            <h3>1984</h3>
-            <div class="articleImg">
-                <img src="../images/1984.jpg"/>
-            </div>
-        </div>
-        <div id="1985">
-            <h3>1985</h3>
-            <div class="articleImg">
-                <img src="../images/1985.jpg"/>
-            </div>
-        </div>
-        <div id="1986">
-            <h3>1986</h3>
-            <div class="articleImg">
-                <img src="../images/1986.jpg"/>
-            </div>
-        </div>
-        <div id="1987">
-            <h3>1987</h3>
-            <div class="articleImg">
-                <img src="../images/1987.jpg"/>
-            </div>
-        </div>
-        <div id="1988">
-            <h3>1988</h3>
-            <div class="articleImg">
-                <img src="../images/1988.jpg"/>
-            </div>
-        </div>
-        <div id="1989">
-            <h3>1989</h3>
-            <div class="articleImg">
-                <img src="../images/1989.jpg"/>
-            </div>
-        </div>
-        <div id="1990">
-            <h3>1990</h3>
-            <div class="articleImg">
-                <img src="../images/1990.jpg"/>
-            </div>
-        </div>
-        <div id="1991">
-            <h3>1991</h3>
-            <div class="articleImg">
-                <img src="../images/1991.jpg"/>
-            </div>
-        </div>
-        <div id="1992">
-            <h3>1992</h3>
-            <div class="articleImg">
-                <img src="../images/1992.jpg"/>
-            </div>
-        </div>
-        <div id="1993">
-            <h3>1993</h3>
-            <div class="articleImg">
-                <img src="../images/1993.jpg"/>
-            </div>
-        </div>
-        <div id="1994">
-            <h3>1994</h3>
-            <div class="articleImg">
-                <img src="../images/1994.jpg"/>
-            </div>
-        </div>
-        <div id="1995">
-            <h3>1995</h3>
-            <div class="articleImg">
-                <img src="../images/1995.jpg"/>
+            <div>
+                <h3>Thirty Years Dead by the Numbers</h3>
+                <p>How the bands setlist and repetoir evolved over the years</p>
+                <div>
+                    <p>Note on data from 1965-1967 - Setlist data from the 
+                            earliest years of the bands existence is incomplete.
+                            By 1968 most all setlists have been verified for accuracy. 
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-        
-
+    <div id="timeline-container">
+    </div>            
+    <div id="container">
+      <div class="bubble-fixed fixed-style" >
+        <div class="active-year bold"></div>
+        <svg id="bubbleChart" width="200", height="200"></svg>
+        <div class="inactive-container">
+        </div>
+        <div class="active-container">
+            <div class="active-title bold"></div>
+            </div>
+        </div>
+      </div> <!-- bubble chart -->
+      <div>
+          <div class="bar-fixed fixed-style">
+              <div class="active-top-ten bold"><span id='bar-year'></span></div>
+              <div id="fixed-radial-tooltip" class="tooltip"></div>
+              <div id="radial-bar"></div>
+          </div>
+      </div>
+  
       
+      <div id="sections">
+        <div class="scroll-trigger" id="1965">
+            <h2 class="trip-title">1965 : The Warlocks</h4>
+                <div class="articleImg">
+                    <img src="../images/1965.jpg" />
+                </div>
+                <div class="data-box">
+                    <div>
+                        <h5>Total Shows :</h5>
+                        <p id="total-shows-1965"></p>
+                    </div>
+                    <div>
+                        <h5>Unique Songs :</h5>
+                        <p id="total-songs-1965"></p>
+                    </div>
+                    <div>
+                        <h5>Song Debuts:</h5>
+                        <div id="song-debuts-1965"></div>
+                    </div>
+                </div>
+            </div>
+        <div class= "scroll-trigger" id="1966">
+            <h2 class="trip-title">1966 : A Headlight on a North Bound Train</h2>
+            <div class="articleImg">
+                <img src="../images/1966.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                        <h5>Total Shows :</h5> 
+                        <p id="total-shows-1966"></p>
+                </div>
+                <div>
+                        <h5>Unique Songs : </h5>
+                        <p id="total-songs-1966"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts : </h5>
+                    <div id="song-debuts-1966"></div>
+                </div>
+
+            </div>
+        </div>  
+       
+        <div class="scroll-trigger" id="1967">
+            <h2 class="trip-title">1967 : The Bus Came By and I Got On</h2>
+            <div class="articleImg">
+                <img src="../images/1967.jpg"/>
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5> 
+                    <p id="total-shows-1967"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs : </h5>
+                    <p id="total-songs-1967"></span>
+                </div>
+                <div>
+                    <h5>Song Debuts: </h5>
+                    <p id="song-debuts-1967"></p>
+                </div>
+                
+            </div>
+        </div>        
+        
+        <div class=" scroll-trigger" id="1968">
+            <h2 class="trip-title">1968 : Dark Star Crashes </h2>
+            <div class="articleImg">
+                <img src="../images/1968.jpg"/>
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows : </h5>
+                    <p class="bold" id="total-shows-1968"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs : </h5>
+                    <p id="total-songs-1968"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts : </h5>
+                    <div id="song-debuts-1968"></div>
+                </div>
+            </div>
+        </div>  
+        
+        <div class="scroll-trigger" id="1969">
+            <h2 class="trip-title">1969 : No More Time to Tell How</h2>
+            <div class="articleImg">
+                <img src="../images/1969.jpg"/>
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :  </h5>
+                    <p id="total-shows-1969"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs :  </h5> 
+                    <p id="total-songs-1969"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts: </h5>
+                    <div id="song-debuts-1969"></div>
+                </div>
+            </div>
+        </div>  
+        
+        <div class=" scroll-trigger" id="1970">
+            <h2 class="trip-title">1970 : No Simple Highway </h2>
+            <div class="articleImg">
+                <img src="../images/1970.jpg"/>
+            </div>
+            
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows : </h5>
+                    <p class="bold" id="total-shows-1970"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs : </h5>
+                    <p id="total-songs-1970"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts: </h5>
+                    <div id="song-debuts-1970"></div>
+                </div>
+            </div>
+        </div>  
+
+        <div class="scroll-trigger" id="1971">
+            <h2 class="trip-title">1971 : Trouble Ahead Trouble Behind </h2>
+            <div class="articleImg">
+                <img src="../images/1971.jpg"/>
+            </div>    
+            <div class="data-box">
+                <div>
+                        <h5>Total Shows :</h5>
+                        <p id="total-shows-1971"></p>
+                </div>
+                <div>
+                        <h5>Unique Songs : </h5> 
+                        <p id="total-songs-1971"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1971"></div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="scroll-trigger" id="1972">
+            <h2 class="trip-title">1972 : Steal Your Face Right Off Your Head </h2>
+            <div class="articleImg">
+                <img src="../images/1972.jpg"/>
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1972"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs : </h5> 
+                    <p id="total-songs-1972"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1972"></div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="scroll-trigger" id="1973">
+            <h2 class="trip-title">1973 : Stranger Ones Have Come By Here </h2>
+            <div class="articleImg">
+                <img src="../images/1973.jpg"/>
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1973"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs : </h5> 
+                    <p id="total-songs-1973"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1973"></div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="scroll-trigger" id="1974">
+            <h2 class="trip-title">1974 : What You Are & What You're Meant to Be </h2>
+            <div class="articleImg">
+                <img src="../images/1974.jpg"/>
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1974"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs : </h5> 
+                    <p id="total-songs-1974"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1974"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-trigger" id="1975">
+            <h2 class="trip-title">1975 : Sell Everything</h2>
+            <div class="articleImg">
+                <img src="../images/1975.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1975"></p>
+                </div>
+                    <div>
+                        <h5>Unique Songs :</h5>
+                        <p id="total-songs-1975"></p>
+                    </div>
+                <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1975"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="scroll-trigger" id="1976">
+            <h2 class="trip-title">1976 : The Music Never Stopped</h2>
+            <div class="articleImg">
+                <img src="../images/1976.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1976"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1976"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1976"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-trigger" id="1977">
+            <h2 class="trip-title">1977 : My Time Comin' Any Day Now </h2>
+            <div class="articleImg">
+                <img src="../images/1977.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1977"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1977"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1977"></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scroll-trigger" id="1978">
+            <h2 class="trip-title">1978 : Don't Tell Me This Town Ain't Got No Heart </h2>
+            <div class="articleImg">
+                <img src="../images/1978.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1978"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1978"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1978"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-trigger" id="1979">
+            <h2 class="trip-title">1979 : Saturday's Child All Grown</h2>
+            <div class="articleImg">
+                <img src="../images/1979.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1979"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1979"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1979"></div>
+                </div>
+            </div>
+        </div>      
+        
+        <div class="scroll-trigger" id="1980">
+            <h2 class="trip-title">1980 : Althea</h2>
+            <div class="articleImg">
+                <img src="../images/1980.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1980"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1980"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1980"></div>
+                </div>
+            </div>
+        </div>    
+        
+        <div class="scroll-trigger" id="1981">
+            <h2 class="trip-title">1981 : Gonna Be a Long Long Crazy Crazy Night</h2>
+            <div class="articleImg">
+                <img src="../images/1981.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1981"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1981"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1981"></div>
+                </div>
+            </div>
+        </div>     
+        
+        <div class="scroll-trigger" id="1982">
+            <h2 class="trip-title">1982 : Picture a Bright Blue Ball Just Spinnin' Spinngin' Free </h2>
+            <div class="articleImg">
+                <img src="../images/1982.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1982"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1982"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1982"></div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="scroll-trigger" id="1983">
+            <h2 class="trip-title">1983 : Least I'm Enjoying the Ride</h2>
+            <div class="articleImg">
+                <img src="../images/1983.jpg" />
+            </div>
+            
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1983"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1983"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1983"></div>
+                </div>
+            </div>
+        </div>      
+        
+        <div class="scroll-trigger" id="1984">
+            <h2 class="trip-title">1984 : Not Fade Away</h2>
+            <div class="articleImg">
+                <img src="../images/1984.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows : </h5>
+                <p id="total-shows-1984"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1984"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1984"></div>
+                </div>
+            </div>
+        </div>      
+        
+        <div class="scroll-trigger" id="1985">
+            <h2 class="trip-title">1985 : </h2>
+            <div class="articleImg">
+                <img src="../images/1985.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1985"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1985"></p>
+                </div>
+                <div>
+                <h5></h5>
+                <div id="song-debuts-1985"></div>
+                </div>
+            </div>
+        </div>  
+     
+        
+        <div class="scroll-trigger" id="1986">
+                <h2 class="trip-title">1986 : </h2>
+                <div class="articleImg">
+                  <img src="../images/1986.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1986"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1986"></p>
+                  </div>
+                  <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1986"></div>
+                  </div>
+                </div>
+              </div>
+               
+        
+        <div class="scroll-trigger" id="1987">
+                <h2 class="trip-title">1987 : Every Silver Lining's Got a Touch of Grey </h2>
+                <div class="articleImg">
+                  <img src="../images/1987.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1987"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1987"></p>
+                  </div>
+                  <div>
+                    <h5></h5>
+                    <div id="song-debuts-1987"></div>
+                  </div>
+                </div>
+              </div>
+              
+        
+        <div class="scroll-trigger" id="1988">
+                <h2 class="trip-title">1988 : If the Thunder Don't Get You Then The Lightning Will</h2>
+                <div class="articleImg">
+                  <img src="../images/1988.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1988"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1988"></p>
+                  </div>
+                  <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1988"></div>
+                  </div>
+                </div>
+              </div>  
+        <div class="unsetContent">
+            <div id="timeline-1988"></div>
+        </div>
+        <div class="scroll-trigger" id="1989">
+                <h2 class="trip-title">1989 : A Lovely View of Heaven but I'd Rather be with You</h2>
+                <div class="articleImg">
+                  <img src="../images/1989.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1989"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1989"></p>
+                  </div>
+                  <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1989"></div>
+                  </div>
+                </div>
+              </div>
+        
+        <div class="scroll-trigger" id="1990">
+            <h2 class="trip-title">1990 : Dear Mr. Fantasy</h2>
+            <div class="articleImg">
+                <img src="../images/1990.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1990"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1990"></p>
+                </div>
+                <div>
+                    <h5></h5>
+                    <div id="song-debuts-1990"></div>
+                </div>
+            </div>
+         </div>
+              
+       
+        <div class="scroll-trigger" id="1991">
+                <h2 class="trip-title">1991 : The Breeze Would Pause to Listen In</h2>
+                <div class="articleImg">
+                  <img src="../images/1991.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1991"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1991"></p>
+                  </div>
+                  <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1991"></div>
+                  </div>
+                </div>
+              </div>
+              
+        
+        <div class="scroll-trigger" id="1992">
+            <h2 class="trip-title">1992 : </h2>
+            <div class="articleImg">
+                <img src="../images/1992.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1992"></p>
+                </div>
+                <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1992"></p>
+                </div>
+                <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1992"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-trigger" id="1993">
+                <h2 class="trip-title">1993 : The Days That Lie Between , Lie Between</h2>
+                <div class="articleImg">
+                  <img src="../images/1993.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1993"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1993"></p>
+                  </div>
+                  <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1993"></div>
+                  </div>
+                </div>
+              </div>
+              
+        
+        <div class="scroll-trigger" id="1994">
+                <h2 class="trip-title">1994 : </h2>
+                <div class="articleImg">
+                  <img src="../images/1994.jpg" />
+                </div>
+                <div class="data-box">
+                  <div>
+                    <h5>Total Shows :</h5>
+                    <p id="total-shows-1994"></p>
+                  </div>
+                  <div>
+                    <h5>Unique Songs :</h5>
+                    <p id="total-songs-1994"></p>
+                  </div>
+                  <div>
+                    <h5>Song Debuts:</h5>
+                    <div id="song-debuts-1994"></div>
+                  </div>
+                </div>
+              </div>
+              
+        
+        <div class="scroll-trigger" id="1995">
+            <h2 class="trip-title">1995 : Blue Light Rain, Unbrokem Chain</h2>
+            <div class="articleImg">
+                <img src="../images/1995.jpg" />
+            </div>
+            <div class="data-box">
+                <div>
+                <h5>Total Shows :</h5>
+                <p id="total-shows-1995"></p>
+                </div>
+                <div>
+                <h5>Unique Songs :</h5>
+                <p id="total-songs-1995"></p>
+                </div>
+                <div>
+                <h5>Song Debuts:</h5>
+                <div id="song-debuts-1995"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
 
 <!-- <script src="../noframework.waypoints.min.js"></script> -->
-<script type="module" src="./js/index.js"></script>
+    
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/radial-bar.js"></script>
+    <script type="module" src="./js/hero.js"></script>
     <script type="module" src="./js/helpers.js"></script>
+    <script type="module" src="./js/textContent.js  "></script>
     <script type="module" src="./js/bubbleChart.js"></script>
     <script type="module" src="./js/areaChart.js"></script>
-    <script type="module" src="./images/map/imgLib.js"></script>
+
   </body>
 </html>
