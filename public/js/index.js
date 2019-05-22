@@ -9,6 +9,7 @@ import {
 import { makeRadialBar } from "./radial-bar.js";
 import { makeText, makeTimeline } from "./textContent.js";
 import { makeBubbleChart } from "./bubbleChart.js";
+import { makeModalCloseBtn, showModal } from "./modal.js";
 
 const years = [
   "1965",
@@ -318,39 +319,34 @@ const staticData = [
 ];
 
 const fade = (id, start, end, seconds) => {
-  let svgToFade = d3.select(`#${id}`)
+  let svgToFade = d3.select(`#${id}`);
   svgToFade
     .style("opacity", start)
     .transition()
     .duration(seconds * 1000)
-    .style("opacity", end)
-}
+    .style("opacity", end);
+};
 
-const hide = (id) => {
-  let elToHide =d3.select(`#${id}`)
-  elToHide 
-    .style("visibility", "hidden")
-}
+const hide = id => {
+  let elToHide = d3.select(`#${id}`);
+  elToHide.style("visibility", "hidden");
+};
 
-const reveal = (id) => {
-  let elToReveal = d3.select(`#${id}`)
-  elToReveal
-    .style("visibility", "visible")
-}
+const reveal = id => {
+  let elToReveal = d3.select(`#${id}`);
+  elToReveal.style("visibility", "visible");
+};
 
 const hideYearCount = () => {
-  hide("count-title")
-  hide("year-count")
-  hide("song-count")
-
+  hide("count-title");
+  hide("year-count");
+  hide("song-count");
 };
 const showYearCount = () => {
-  reveal("count-title")
-  reveal("year-count")
-  reveal("song-count")
+  reveal("count-title");
+  reveal("year-count");
+  reveal("song-count");
 };
-
-
 
 //vertical fixed timeline showing current year
 
@@ -384,15 +380,48 @@ const activeTicks = year => {
 let careerRadialMade = false;
 let careerBubbleMade = false;
 
+//SCROLL FUNCTION called lead in text
+const mainContent = () => {
+  hide("stealie-container");
+  hide("career-radial-title");
+  d3.select(".lead").html(
+    `<h3>A Band Beyond Description</h3>
+    <p class="drop-letter">
+            Even for die hard deadheads The Grateful Dead can be difficult to categorize. 
+            For the uninitiated, the shear volume of recordings and songs is enough 
+            to be scared away. As music critic  Tim Sommer sums up nicely--</p>
+            <blockquote> 
+            “Loving the Grateful Dead is like ridin’ that train to Hogwarts—
+            you must believe that the track exists in order to climb aboard.”
+            </blockquote>
+    <p>
+            These visualizations use data from archive.com and setlist.fm 
+            to observe both total career setlist data as well as specific setlist 
+            data for each year from 1965 - 1995, examining: 
+    </p>
+                <ul>
+                    <li>
+                        What songs were played the most.
+                    </li>
+                    <li>
+                        The size of their repetoir - e.g. how many unique songs were played 
+                    </li> 
+                    <li>
+                        The lifespan of each song, noting first played, last played, and most played years. 
+                    </li>
+                </ul>`
+  );
+};
+
 // SCROLL FUNCTION called on scroll into career radial chart
 const careerRadial = async () => {
-  reveal("stealie-container")
-  reveal("career-radial-title")
-  fade("stealie-container", ".1", ".9", 5)
+  reveal("stealie-container");
+  reveal("career-radial-title");
+  fade("stealie-container", ".1", ".9", 5);
   clearTicks();
   removeFixedStyle();
   hideYearCount();
-  hide("timeline-container")
+  hide("timeline-container");
   if (!careerRadialMade) {
     makeRadialBar("career");
     careerRadialMade = true;
@@ -401,37 +430,37 @@ const careerRadial = async () => {
 
 //SCROLL FUNCTION called on scroll into career bubble chart
 const careerBubble = async () => {
-  reveal("stealie-container")
-  fade("stealie-container", ".1", ".9", 5)
-  hide("career-radial-title")
+  reveal("stealie-container");
+  fade("stealie-container", ".1", ".9", 5);
+  hide("career-radial-title");
   clearTicks();
   showYearCount();
   removeFixedStyle();
-  hide("timeline-container")
+  hide("timeline-container");
   const data = await totalSongData();
   if (!careerBubbleMade) {
     careerBubbleMade = true;
-    makeBubbleChart(data, "career-chart", "", 400, 400);
+    makeBubbleChart(data, "career-chart", "", 400, 600);
   }
 };
 
-//TODO Scroll Function called for Spiral 
+//TODO Scroll Function called for Spiral
 
 const careerSpiral = async () => {
   clearTicks();
   removeFixedStyle();
   hideYearCount();
-  hideTimeline();
-}
+  hide("timeline-container");
+};
 
 //Scroll Function called on scroll into each div with id=${year}
 const yearTotals = async year => {
   //reset Career flags when entering year content
   careerBubbleMade = false;
   careerRadialMade = false;
-  hide("stealie-container")
+  hide("stealie-container");
   hideYearCount();
-  reveal("timeline-container")
+  reveal("timeline-container");
   styleFixedContainer();
   clearTicks();
   activeTicks(year);
@@ -444,7 +473,7 @@ const yearTotals = async year => {
   const barlow = obj.barlow ? obj.barlow : undefined;
 
   makeText(year, unique, count, countChange, uniqueChange, hunter, barlow);
-  makeBubbleChart(yearTotal.songs, "bubbleChart", year, 200, 200);
+  makeBubbleChart(yearTotal.songs, "bubbleChart", year, 200, 250);
   makeRadialBar(year);
 };
 
@@ -463,17 +492,22 @@ function scroll(n, offset, func) {
 //append blank div to scroll container
 
 const scrollDiv = () => {
-  d3.selectAll(".scroll-trigger").append("div").style("min-height", "400px")
-}
-hide("stealie-container")
+  d3.selectAll(".scroll-trigger")
+    .append("div")
+    .style("min-height", "400px");
+};
+hide("stealie-container");
 scrollDiv();
 makeTimeline();
-hide("timeline-container")
+hide("timeline-container");
 hideYearCount();
-makeStealie('hero-container')
-hide("stealie-container")
+makeStealie("hero-container");
+hide("stealie-container");
+makeModalCloseBtn();
 
-new scroll("1962", "10%", careerRadial);
+new scroll("1961", "10%", mainContent);
+
+new scroll("1962", "1%", careerRadial);
 
 new scroll("1963", "10%", careerBubble);
 

@@ -31,6 +31,7 @@ body {
   font-family: "Merriweather", serif;
   color: var(--site-black);
   background-color: var(--site-white);
+  scroll-behavior: smooth;
 }
 
 .blue {
@@ -40,10 +41,10 @@ body {
   color: var(--site-red);
 }
 
-#hero-container {
+/* #hero-container {
   border-bottom: solid 3px var(--site-black);
-  background-color: var(--site-white);
-}
+  background-color: var(--site-black);
+} */
 
 .tooltip {
   position: absolute;
@@ -51,19 +52,27 @@ body {
 
   background: var(--site-white);
   border-radius: 3px;
-  box-shadow: -3px 3px 15px #888;
+  box-shadow: -3px 3px 15px var(--site-black);
   color: var(--site-black);
   padding: 6px;
 }
 
-#year-count-container, #song-count-container, #count-title-container {
+#year-count-container,
+#song-count-container,
+#count-title-container {
   width: 100%;
   height: 100%;
 }
-#year-count, #song-count, #count-title{
+#year-count,
+#song-count {
   position: fixed;
   right: 10%;
   height: 100px;
+}
+
+#count-title-container h3 {
+  margin-bottom: 0;
+  text-align: center;
 }
 #year-count {
   top: 25%;
@@ -72,25 +81,39 @@ body {
   top: 40%;
 }
 
-#count-title{
-  font-size: 1.4em; 
-  top: 10%;
-}
-
 #hero-text {
   text-align: center;
-  background-color: var(--site-white);
-  padding: 1em;
-  opacity: 0.9;
+  color: var(--site-black);
+  padding: 1em 0em;
   width: 100%;
   font-size: 1.2em;
   margin: auto;
+  margin-top: 0.3em;
+}
+#hero img {
+  width: 100%;
+  height: auto;
+}
+
+#hero .title {
+  font-family: var(--site-writing);
 }
 
 #hero-text p {
   margin-top: 0;
   margin-bottom: 0;
   font-family: var(--site-writing);
+}
+
+.years-lead-in {
+  background-color: var(--p1);
+  color: var(--site-white);
+  padding: 1em;
+  text-align: center;
+}
+
+.years-lead-in h3 {
+  font-size: 2em;
 }
 
 .writing {
@@ -110,8 +133,15 @@ body {
   display: inline-flex;
 }
 
-.explainer-text p, .explainer-text h3, .explainer-text ul {
-  max-width: 650px; 
+.explainer-text ul li {
+  line-height: 2.2em;
+}
+
+.explainer-text blockquote,
+.explainer-text p,
+.explainer-text h3,
+.explainer-text ul {
+  max-width: 650px;
   margin: auto;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -164,12 +194,11 @@ body {
   height: 100vh;
 }
 
+.career-scroll .career-radial-bar-container {
+  width: 450px;
+}
 #career-chart-container p {
   text-align: center;
-}
-
-#career-chart, #radial-chart-svg { 
-  margin: 33px 0px 0px 33px;
 }
 
 .career-radial-bar-container .axis {
@@ -177,12 +206,17 @@ body {
   font-style: normal;
 }
 
-#career-radial-title {
+#career-radial-title,
+#count-title-container,
+#song-chart-title {
   position: fixed;
-  top: 10%;
-  left: 10%;
+  top: -5%;
+  left: 0%;
   font-size: 1.2em;
   visibility: hidden;
+}
+div#career-radial-title {
+  left: 35%;
 }
 
 .career-container {
@@ -192,11 +226,16 @@ body {
 }
 
 ol li {
-  background: rgb(44,14,240);
-  background: radial-gradient(circle, rgba(44,14,240,0.23993347338935578) 0%, rgba(237,238,224,0.041053921568627416) 71%);
+  background: rgb(44, 14, 240);
+  background: radial-gradient(
+    circle,
+    rgba(44, 14, 240, 0.23993347338935578) 0%,
+    rgba(237, 238, 224, 0.041053921568627416) 71%
+  );
 }
 
-ol, ol li{
+ol,
+ol li {
   padding: 0;
 }
 
@@ -204,8 +243,8 @@ ol li {
   height: 300vh;
 }
 
-.career-scroll{
-  position: sticky; 
+.career-scroll {
+  position: sticky;
   top: 50px;
 }
 
@@ -217,11 +256,13 @@ ol li {
   height: 100%;
   position: absolute;
   padding: 0, 5%;
-  left: 15%;
+  left: 10%;
+  width: calc(100vw - 375px - 10%);
 }
 
 #sections > div {
   height: 135%;
+  width: 100%;
 }
 
 #sections div.graph-scroll-active {
@@ -277,21 +318,10 @@ p.drop-letter::first-letter {
 
 .articleImg {
   width: 100%;
-  overflow: hidden;
-}
-
-.articleImg {
-  position: sticky;
-  top: 50px;
-}
-
-.data-box {
-  position: sticky;
-  top: 100px;
 }
 
 .articleImg img {
-  width: 50%;
+  width: 98%;
   height: auto;
 }
 
@@ -334,7 +364,6 @@ circle::before {
   margin-top: 15vh;
 }
 
-
 .scroll-trigger h4 {
   font-family: "Roboto", sans-serif;
 }
@@ -353,14 +382,12 @@ circle::before {
 #hero {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
-  background: url("../images/collage.png");
 }
 
 .title {
-  background-color: var(--site-black);
-  font-size: 3em;
-  color: var(--site-white);
+  font-size: 4em;
+  margin-top: 0.5em;
+
   text-align: center;
   font-family: "Bungee Outline", cursive;
 }
@@ -412,7 +439,6 @@ circle::before {
 
 .data-box :nth-child(-n + 2) {
   width: 300px;
-
 }
 
 .diff {
@@ -443,9 +469,9 @@ circle::before {
   justify-content: space-around;
 }
 
-
 .explainer-text h3 {
   text-decoration: underline;
+  font-family: "Roboto", sans-serif;
 }
 
 #bubbleChart {
@@ -470,15 +496,18 @@ circle::before {
   stroke: #cccccc;
   stroke-width: 1px;
 }
-#career-radial-bar .axis circle,
 #radial-bar .axis circle {
   fill: none;
 }
 
+#radial-bar {
+  margin: 0 4em;
+}
+
 .radial-text {
-  font-size: 0.7em;
-  fill: var(--p1);
-  fill-opacity: 0.6;
+  font-size: 0.8em;
+  fill: var(--site-black);
+  fill-opacity: 1;
   font-style: italic;
 }
 #career-radial-bar .r.axis text,
@@ -491,4 +520,120 @@ circle::before {
 
 #radial-bar .radial-text {
   display: none;
+}
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #9e9d94cc;
+  z-index: 10;
+  display: none;
+}
+
+.modal-data {
+  padding: 0.5em 3em;
+  background-color: var(--site-black);
+  margin: auto;
+  color: var(--site-white);
+  font-family: "Roboto", sans-serif;
+}
+.modal-data h3 {
+  font-size: 1.3em;
+  text-transform: uppercase;
+}
+
+#modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+  height: 80%;
+  width: 90%;
+  max-width: 600px;
+  /* margin: auto; */
+  background-color: var(--site-white);
+  z-index: 100;
+  display: none;
+  box-shadow: 5px 5px 20px;
+  padding-bottom: 2em;
+}
+
+#modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#modal-content svg path {
+  /* stroke: var(--site-white); */
+  stroke-width: 4px;
+}
+
+#modal .xaxis,
+#modal .yaxis {
+  stroke: var(--site-black);
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+}
+
+#modal-content button {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 75px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: larger;
+  border: none;
+  background-color: var(--site-white);
+  cursor: pointer;
+  text-transform: capitalize;
+  font-family: "Roboto", sans-serif;
+}
+#modal .annotation-note-content {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+#modal svg .annotation.badge .annotation-subject path {
+  fill: var(--p5);
+  stroke-width: 0px;
+  stroke-dasharray: none;
+}
+
+#modal .annotation path {
+  stroke: var(--annotation-badge-color);
+}
+
+rect.annotation-note-bg {
+  fill: var(--site-white);
+  fill-opacity: 0.8;
+}
+
+text.annotation-note-label,
+text.annotation-note-title {
+  fill: var(--site-black);
+}
+
+#bubble-chart svg .annotation-note {
+  transform: translate(83, 63);
+}
+
+#bubbleChart #background-circle {
+  display: none;
+}
+
+#radial-bar rect {
+  display: none;
+}
+path.connector {
+  stroke: var(--site-black);
+  stroke-opacity: 0.2;
+}
+
+div.lead {
+  margin-top: 0;
 }

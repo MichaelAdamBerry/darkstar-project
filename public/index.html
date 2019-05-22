@@ -7,72 +7,52 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Roboto:500|Bungee+Inline|Bungee+Outline|Shadows+Into+Light" rel="stylesheet">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.independent.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.independent.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.independent.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.min.js"></script>
   </head>
   <body>
-        <div id="hero-container">
-    <div class="title bold">
-        <h3>GRATEFUL DATA</h3>
-        
+    <div id="modal-overlay"></div>
+    <div id="modal">
+        <div id="modal-content">
+        </div>
     </div>
-   
-        <!-- <div id="hero"></div> -->
+        <div id="hero-container">
+
+         <div id="hero">
+             <img src="images/hero.jpg"/>
+         </div>
+         <div class="title">
+                <h3>GRATEFUL DATA</h3>
+            </div>
         <div class="full-height">
             <div id="hero-text">
-
                 <h3>Exploring 30 Years of Setlist Data</h3>
-
             </div>
         </div>
     </div>
     <div class="career-container">
             
         <div class="explainer-text">
-            <div>
-                <h3>A Band Beyond Description</h3>
-                <p class="drop-letter">
-                        Even for die hard deadheads The Grateful Dead can be difficult to categorize. 
-                        For the uninitiated, the shear volume of recordings and songs is enough 
-                        to be scared away. As music critic  Tim Sommer sums up nicely: 
-                        “Loving the Grateful Dead is like ridin’ that train to Hogwarts—
-                        you must believe that the track exists in order to climb aboard.”
-                </p>
-                <p>
-                        These visualizations use data from archive.com and setlist.fm 
-                        to observe both total career setlist data as well as specific setlist 
-                        data for each year from 1965 - 1995, examining: 
-                            <ul>
-                                <li>
-                                    What songs were played the most.
-                                </li>
-                                <li>
-                                    The size of their repetoir - How many unique songs were played 
-                                </li> 
-                                <li>
-                                    When songs debuted. 
-                                </li>
-                                <li>
-                                    The make up of the setlist by primary lyricist and composer
-                                </li>
-                            </ul>
-                </p>
+            <div id="1961" class="lead scroll-trigger">                
+            </div>
                 <div id="stealie"></div>
                 <ol>
                     <li>
                         <div id="1962" class="career-scroll">
-                            <div  class="career-radial-bar-container">
-                                <div id="career-radial-title">
-                                    <h3>Career Most Played Songs</h3>
+                            
+                                <div  class="career-radial-bar-container">
+                                    <div id="career-radial-bar"></div>
                                 </div>
-                                <div id="career-radial-bar"></div>
-                            </div>
                         </div>
                         <div class="scroller-div"></div>
                     </li>
                     <li>
                         <div id="1963" class="career-scroll">
-                            <div id="count-title-container">
-                                    <h3 id="count-title">Career Unique Songs played</h3>
-                            </div>
+
                             
                             <div id="year-count-container">
                                     <div id="year-count"></div>
@@ -80,8 +60,7 @@
                             <div id="song-count-container">
                                 <div id="song-count"></div>
                             </div>
-                            <div  class="career-chart-container">
-                                    
+                            <div  class="career-chart-container"> 
                                     <svg id="career-chart" width="400" height="600"></svg>
                             </div>
                         </div>
@@ -89,19 +68,16 @@
                     </li>
                     <li>
                         <div id="1964" class="career-scroll">
-                            <h3>Writers of Each Song</h3>
+                                <div id="song-chart-title-container">
+                                        <h3 id="song-chart-title">3. Song Lifespans</h3>
+                                </div>
                         </div>
                         <div class="scroller-div"></div>
-
-
                     </li>
-
                 </ol>
-                
-            </div>
-            <div>
-                <h3>Thirty Years Dead by the Numbers</h3>
-                <p>How the bands setlist and repetoir evolved over the years</p>
+            <div class="years-lead-in">
+                <h3 class="bold">3. Songs and Debuts by the Year</h3>
+                <p>Showing the evolution of the Dead's repetoir (plus pictures!)</p>
                 <div>
                     <p>Note on data from 1965-1967 - Setlist data from the 
                             earliest years of the bands existence is incomplete.
@@ -802,7 +778,7 @@
 </div>   
 
 <!-- <script src="../noframework.waypoints.min.js"></script> -->
-    
+    <script type="module" src="js/modal.js"></script>
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/radial-bar.js"></script>
     <script type="module" src="./js/hero.js"></script>
