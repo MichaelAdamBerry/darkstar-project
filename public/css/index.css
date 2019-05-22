@@ -106,7 +106,7 @@ body {
 }
 
 .years-lead-in {
-  background-color: var(--p1);
+  background-color: var(--p2);
   color: var(--site-white);
   padding: 1em;
   text-align: center;
@@ -420,6 +420,8 @@ circle::before {
 .unsetContent h5 {
   font-family: "Roboto", sans-serif;
   margin-top: 0.7em;
+  font-size: 1em;
+  color: var(--site-black);
 }
 
 .unsetContent > div {
@@ -450,10 +452,9 @@ circle::before {
 
 .data-box > div {
   width: 360px;
-  display: flex;
-  /* margin: auto; */
+
   justify-content: space-between;
-  margin: 1em;
+  margin: 2em 1em;
   border-top: solid 1px #cccccc;
   padding: 0em 3em;
 }
@@ -532,9 +533,13 @@ circle::before {
   display: none;
 }
 
+#modal-line-chart {
+  background-color: var(--site-blue);
+}
+
 .modal-data {
   padding: 0.5em 3em;
-  background-color: var(--site-black);
+  background-color: var(--p2);
   margin: auto;
   color: var(--site-white);
   font-family: "Roboto", sans-serif;
@@ -557,7 +562,6 @@ circle::before {
   z-index: 100;
   display: none;
   box-shadow: 5px 5px 20px;
-  padding-bottom: 2em;
 }
 
 #modal-content {
@@ -565,6 +569,7 @@ circle::before {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-bottom: 2em;
 }
 
 #modal-content svg path {
@@ -574,7 +579,7 @@ circle::before {
 
 #modal .xaxis,
 #modal .yaxis {
-  stroke: var(--site-black);
+  color: var(--p4);
   font-size: 17px;
   font-family: "Roboto", sans-serif;
 }
@@ -599,7 +604,7 @@ circle::before {
 }
 
 #modal svg .annotation.badge .annotation-subject path {
-  fill: var(--p5);
+  fill: var(--p3);
   stroke-width: 0px;
   stroke-dasharray: none;
 }
