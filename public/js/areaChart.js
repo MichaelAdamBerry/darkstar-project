@@ -1,10 +1,5 @@
 //exports makeAreaChart and clearAreaChart to be imported by bubbleChart
-import {
-  totalSongData,
-  songDataByYear,
-  getAllSongDataByYear,
-  filterData
-} from "./helpers.js";
+import { songDataByYear, filterData } from "./fetchData.js";
 
 export const clearAreaChart = () => {
   const svg = d3.select(".selectedAreaChart");
@@ -17,31 +12,24 @@ export const makeAreaChart = async (
   height = 400,
   color = `#010101`
 ) => {
-  console.log("makeAreaChart called");
   const data = await songDataByYear();
 
-  const margin = { top: 150, right: 50, bottom: 20, left: 50 };
+  const margin = { top: 180, right: 50, bottom: 20, left: 50 };
   let songData = await filterData(song, data);
 
-  let firstPlayedObj = songData.find(d => {
+  // variables to be used in notation
+  const firstPlayedObj = songData.find(d => {
     return d.count > 0;
   });
-
   const firstPlayed = firstPlayedObj.year;
-  console.log(firstPlayed);
-
   const lastPlayedObj = songData.reverse().find(d => d.count > 0);
   const lastPlayed = lastPlayedObj.year;
-
-  console.log(lastPlayed);
-
   const peakYear = songData.find(
     d => d.count === d3.max(songData, i => i.count)
   );
   const peakYearPlayed = peakYear.year;
 
-  console.log("peak year", peakYear);
-
+  //make scales
   const yScale = d3
     .scaleLinear()
     .domain(d3.extent(songData, d => d.count))
@@ -50,6 +38,8 @@ export const makeAreaChart = async (
     .scaleLinear()
     .domain([1965, 1995])
     .range([margin.left, width - margin.right]);
+
+  //make axis
   const xAxis = g => {
     g.attr("transform", `translate(0, ${height})`).call(
       d3
@@ -65,6 +55,8 @@ export const makeAreaChart = async (
     g.attr("class", "yaxis");
     return g.call(d3.axisLeft(yScale).ticks(4));
   };
+
+  //make area chart
   const area = d3
     .area()
     .x(d => xScale(d.year))
@@ -72,6 +64,7 @@ export const makeAreaChart = async (
     .y1(d => yScale(d.count))
     .curve(d3.curveCatmullRom.alpha(0.5));
 
+  //make area chart top line stroke path
   const valueLine = d3
     .line()
     .x(d => xScale(d.year))
@@ -79,20 +72,60 @@ export const makeAreaChart = async (
     //.curve(d3.curveBundle.beta(0.5));
     .curve(d3.curveCatmullRom.alpha(0.55));
 
+  //make svg
   const svg = d3.select(".selectedAreaChart");
   svg
     .style("width", width)
-    .style("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr(
-      "transform",
-      `translate(${margin.left}, ${margin.top + margin.bottom})`
-    )
-    .attr("font-family", "sans-serif");
+    .style("height", height + margin.top + margin.bottom);
 
+  // make defs for gradient definitions
   const defs = svg.append("defs");
 
-  let backgroundGradient = defs
+  //variable for separation of styles between main career chart
+  //and top five chart by year in yearly chart
+  const translateChartY = 120;
+
+  let header = svg.append("g");
+
+  //gradient for header polygon fill
+  let gradientOffset = defs
+    .append("radialGradient")
+    .attr("cx", "75%")
+    .attr("cy", "50%")
+    .attr("r", "80%")
+    .attr("id", "headerGradient");
+
+  gradientOffset
+    .append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", d3.rgb("#791d38").brighter(1));
+
+  gradientOffset
+    .append("stop")
+    .attr("offset", "60%")
+    .attr("stop-color", (d, i) => d3.rgb("#791d38"));
+
+  header
+    .append("polygon")
+    .attr("points", `0, 0 ${width}, 0 ${width}, 130 0, 200 0,0`)
+    .attr("fill", "url(#headerGradient)");
+
+  header
+    .append("text")
+    .attr("x", 150)
+    .attr("y", 125)
+    .style("fill", "var(--site-white)")
+    .style("font-family", `"Merriweather", serif`)
+    .style("font-size", "2em")
+    .text(song);
+
+  const chartcontainer = svg
+    .append("g")
+    .style("transform", `translate(10px, ${translateChartY}px)`)
+    .attr("font-family", "sans-serif");
+
+  //gradient for area fill
+  const backgroundGradient = defs
     .append("linearGradient")
     .attr("class", "backgroundGradientOffset")
     .attr("x1", "0%")
@@ -125,7 +158,8 @@ export const makeAreaChart = async (
     .attr("offset", "95%")
     .attr("stop-color", "#191d98");
 
-  svg
+  // call d3 line defined above
+  chartcontainer
     .append("path")
     .datum(songData)
     .attr("d", valueLine)
@@ -133,14 +167,16 @@ export const makeAreaChart = async (
     .attr("stroke", color)
     .attr("fill", "none");
 
-  svg
+  // call d3 area defined above
+  chartcontainer
     .append("path")
     .datum(songData)
     .attr("d", area)
     .attr("class", "area")
     .attr("fill", "url(#areabackgroundGradient)");
 
-  svg.append("g").call(xAxis);
+  //call axis defined above
+  chartcontainer.append("g").call(xAxis);
   d3.selectAll(".xaxis text")
     .style("text-anchor", "end")
     .style("font-size", "17px")
@@ -148,12 +184,12 @@ export const makeAreaChart = async (
     .attr("dy", ".15em")
     .attr("transform", "rotate(-65)");
 
-  svg.append("g").call(yAxis);
+  chartcontainer.append("g").call(yAxis);
   d3.selectAll(".yaxis .tick line").attr("stroke", "none");
   d3.select(".yaxis path").attr("stroke", "none");
 
+  //make and position annotations per d3-annotations api
   const type = d3.annotationBadge;
-
   const annotations = [
     {
       className: "firstPlayed",
@@ -203,6 +239,7 @@ export const makeAreaChart = async (
   d3.select("svg")
     .append("g")
     .attr("class", "annotation-group")
+    .style(`transform`, `translate(10px, ${translateChartY}px)`)
     .call(makeAnnotations);
 
   const annotationsLegend = [
@@ -219,9 +256,9 @@ export const makeAreaChart = async (
       subject: { text: `'${lastPlayed.slice(2)}` }
     }
   ].map(function(d, i) {
-    d.x = margin.left + i * 145;
-    d.y = 40;
-    (d.subject.x = "right"), (d.subject.y = "bottom"), (d.subject.radius = 12);
+    d.x = 450;
+    d.y = i * 40 + 170;
+    //(d.subject.x = "right"), (d.subject.y = "bottom"), (d.subject.radius = 12);
     return d;
   });
   const makeLegendAnnotations = d3
@@ -238,13 +275,12 @@ export const makeAreaChart = async (
     .data(annotationsLegend)
     .enter()
     .append("text")
+    .attr("class", "bold")
     .style("font-size", "15px")
     .attr("class", "legend")
     .text(function(d) {
       return d.note.label;
     })
-    .attr("x", function(d, i) {
-      return margin.right + 25 + i * 150;
-    })
-    .attr("y", 50);
+    .attr("x", 480)
+    .attr("y", (d, i) => i * 40 + 170);
 };

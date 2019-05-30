@@ -1,10 +1,10 @@
-//heavily inspired by Anton Orlov's example at bl.ocks.org
+//remember to attribute  Anton Orlov's example at bl.ocks.org
 
 import {
   songDataByYear,
   getAllSongDataByYear,
   totalSongData
-} from "./helpers.js";
+} from "./fetchData.js";
 import { showModal, makeModalContent } from "./modal.js";
 
 const colors = ["#3f51b5", "#b300ff", "#6751f0", "#d83a2f", "#8119ff"];
@@ -61,26 +61,42 @@ const topFiveSongs = async yearData => {
 };
 
 export const radialBar = async year => {
-  //data
+  let { availWidth } = window.screen;
 
-  let songData, data, width, height, id, songVar, fill;
+  let songData, data, width, height, id, songVar, top, fill, left, arcPadding;
 
   if (year === "career") {
     songData = await totalSongData();
     data = await topTenSongs(songData);
-    width = 650;
-    height = 440;
+    width = 200;
+    height = 110;
     id = "#career-radial-bar";
     songVar = "song";
-    fill = "var(--site-black)";
+    fill = "#39363470";
+    top = 60;
+    left = 60;
+    arcPadding = 7;
   } else {
     songData = await getSongData(year);
     data = await topFiveSongs(songData);
-    width = 330;
-    height = 270;
+    width = 120;
+    height = 110;
     id = "#radial-bar";
     songVar = "name";
+    top = 60;
     fill = "var(--trippy-blue-4)";
+    left = 60;
+    arcPadding = 5;
+  }
+  console.log("screen width", availWidth);
+  let viewBoxWidthVar;
+  let stealieContainer = d3.select("#career-radial-bar div.stealie-absolute");
+  if (availWidth <= 425) {
+    viewBoxWidthVar = 125;
+    stealieContainer.style("width", "82%").style("padding-top", "0%");
+  } else {
+    viewBoxWidthVar = width;
+    stealieContainer.style("padding-top", "0").style("width", "500px");
   }
 
   // geometry  and chart variables
@@ -102,19 +118,19 @@ export const radialBar = async year => {
     .append("div")
     .attr("class", `tooltip`);
 
-  let topPadding = 300;
+  let topPadding = 30;
+
   const svg = d3
     .select(`${id}`)
     .append("svg")
     .attr("id", "radial-chart-svg")
-    .attr("width", width)
-    .attr("height", height + topPadding)
+    .attr("viewBox", `0 0 ${viewBoxWidthVar} ${height + topPadding}`)
+    .style("margin-left", "0px")
     .append("g")
-    .attr("transform", `translate(${height / 2 + 7} ,${height / 2})`);
+    .style("transform", `translate(${left}px ,${top}px)`);
 
   const PI = Math.PI,
     arcMinRadius = 10,
-    arcPadding = 8,
     labelPadding = 7,
     numTicks = 5,
     numArcs = data.length;
@@ -145,14 +161,14 @@ export const radialBar = async year => {
   };
 
   let titleBgCirc = {
-    r: 100,
-    cx: 320,
-    cy: 300
+    r: 25,
+    cx: 90,
+    cy: 40
   };
 
   let textBgRect = {
-    width: 205,
-    x: -205,
+    width: 50,
+    x: -50,
     y: 0 - height / 2,
     height: height / 2
   };
@@ -182,43 +198,47 @@ export const radialBar = async year => {
   const titleBg = svg.append("g");
   titleBg
     .append("circle")
+    .attr("class", "mobile-hide")
     .attr("r", titleBgCirc.r)
     .attr("cx", titleBgCirc.cx)
     .attr("cy", titleBgCirc.cy)
     .style("stroke", "var(--site-black)")
+    .style("stroke-width", ".3px")
     .style("stroke-opacity", ".4")
     .style("fill", "var(--p5)")
-    .style("fill-opacity", ".95")
-    .style("box-shadow", "2px 2px 20px var(--site-black)");
+    .style("fill-opacity", ".95");
 
   titleBg
     .append("text")
     .attr("class", "bold")
-    .attr("x", 285)
-    .attr("y", 260)
+    .attr("class", "mobile-hide")
+    .attr("x", titleBgCirc.cx - 11)
+    .attr("y", titleBgCirc.cy - 7)
     .attr("fill", "var(--site-white)")
     .text("Top 10 ")
-    .style("font-size", "1.2em")
+    .style("font-size", ".3em")
     .style("text-decoration", "underline");
 
   titleBg
     .append("text")
     .attr("class", "bold")
-    .attr("x", 235)
-    .attr("y", 290)
+    .attr("class", "mobile-hide")
+    .attr("x", titleBgCirc.cx - 22)
+    .attr("y", titleBgCirc.cy)
     .attr("fill", "var(--site-white)")
     .text("Most Played Songs")
-    .style("font-size", "1.2em")
+    .style("font-size", ".3em")
     .style("text-decoration", "underline");
 
   titleBg
     .append("text")
     .attr("class", "bold")
-    .attr("x", 275)
-    .attr("y", 320)
+    .attr("class", "mobile-hide")
+    .attr("x", titleBgCirc.cx - 12)
+    .attr("y", titleBgCirc.cy + 7)
     .attr("fill", "var(--site-white)")
     .text("1965 - 1995")
-    .style("font-size", "1em");
+    .style("font-size", ".3em");
 
   const textBg = svg.append("g");
 
@@ -229,26 +249,35 @@ export const radialBar = async year => {
     .attr("x", textBgRect.x)
     .attr("y", textBgRect.y)
     .style("stroke", "var(--site-black)")
+    .style("stroke-width", ".3px")
     .style("stroke-opacity", ".4")
     .style("fill", "var(--site-white)")
-    .style("fill-opacity", ".8")
+    .style("fill-opacity", ".95")
     .style("box-shadow", "2px 2px 20px var(--site-black)");
 
-  svg
+  let labelText = svg
     .selectAll(".label-text")
     .data(data)
     .enter()
     .append("text")
-    .attr("x", -15)
-    .attr("y", (d, i) => -getOuterRadius(i) + arcPadding + 5)
+    .attr("x", -2)
+    .attr("y", (d, i) => -getOuterRadius(i))
+    .style("fill", (d, i) => color2(i))
     .transition()
-    .delay((d, i) => i * 250)
+    .delay((d, i) => i * 400)
     .text((d, i) => `${d[songVar]}`)
     .attr("text-anchor", "end")
     .attr("class", "bold")
-    .style("fill", (d, i) => color2(i))
-    .style("font-size", "1em")
-    .style("margin-top", ".3em");
+
+    .style("cursor", "pointer");
+
+  labelText.each(setToolTip);
+
+  if (year === "career" || availWidth < 425) {
+    labelText.style("font-size", ".325em");
+  } else {
+    labelText.style("font-size", ".32em");
+  }
 
   axialAxis
     .append("text")
@@ -263,22 +292,24 @@ export const radialBar = async year => {
     )
     .text(d => d.name);
 
-  let position = { x: 205, y: -155 };
+  let position = { x: 77, y: -34 };
   let rect = { padding: 15, width: 100 };
 
   const intstructionsBg = svg.append("g");
 
   intstructionsBg
     .append("rect")
-    .attr("width", rect.width)
-    .attr("height", 100)
-    .attr("x", position.x - rect.padding)
-    .attr("y", position.y - rect.padding - 15)
+    .attr("width", 25)
+    .attr("height", 25)
+    .attr("x", 75)
+    .attr("y", -40)
+    .attr("id", "radial-instructions-rect")
+    .attr("class", "mobile-hide")
     .style("stroke", "var(--site-black)")
     .style("stroke-opacity", ".4")
     .style("fill", "var(--site-white)")
     .style("fill-opacity", ".8")
-    .style("box-shadow", "2px 2px 20px var(--site-black)");
+    .style("box-shadow", "2px 2px 5px var(--site-black)");
 
   const instructions = svg.append("g").attr("class", "radial-text");
 
@@ -286,19 +317,24 @@ export const radialBar = async year => {
     .append("text")
     .attr("x", position.x)
     .attr("y", position.y)
+    .attr("id", "radial-instructions-text")
+    .attr("class", "mobile-hide")
     .style("text-anchor", "start")
+    .style("font-size", ".25em")
     .html(
       `Hover over 
-        <tspan x="${position.x}" y="${position.y + 15}">song bar for</tspan>
-        <tspan x="${position.x}" y="${position.y + 30}">more</tspan>
-        <tspan x="${position.x}" y="${position.y + 45}">information</tspan>`
+        <tspan x="${position.x}" y="${position.y + 5}">song bar for</tspan>
+        <tspan x="${position.x}" y="${position.y + 10}">more</tspan>
+        <tspan x="${position.x}" y="${position.y + 15}">information</tspan>`
     );
 
-  let colorBase = "#2f2f2f";
+  let colorBase = "var(--site-white)";
+  let stroke = "#2f2f2f25";
   let count = 0;
-  const circles = d3.selectAll("circle").attr("fill", colorBase);
-
-  console.log(circles);
+  const circles = d3
+    .selectAll(".axis circle")
+    .attr("fill", colorBase)
+    .style("stroke", stroke);
 
   let arcs = svg
     .append("g")
@@ -313,8 +349,8 @@ export const radialBar = async year => {
 
   arcs
     .transition()
-    .delay((d, i) => i * 200)
-    .duration(1000)
+    .delay((d, i) => i * 400)
+    // .duration(1000)
     .attrTween("d", arcTween);
 
   let allArcs = d3.selectAll(`${id} .arc`);
@@ -351,8 +387,8 @@ export const radialBar = async year => {
   }
 
   function showTooltip(d) {
-    let left = d3.event.pageX + 70 + "px";
-    let top = d3.event.pageY - 70 + "px";
+    let left = d3.event.pageX + 15 + "px";
+    let top = d3.event.pageY - 50 + "px";
     console.log(`tool tip at ${left} left and ${top} right`);
     tooltip
       .style("left", left)
@@ -371,6 +407,12 @@ export const radialBar = async year => {
       .style("font-style", "italic");
   }
 
+  if (year !== "career") {
+    tooltip.style("font-size", ".7em");
+  } else {
+    tooltip.style("font-size", "1em");
+  }
+
   function hideTooltip() {
     let title = d3.selectAll(".tooltip-title");
     title.remove();
@@ -383,6 +425,7 @@ export const radialBar = async year => {
 export const makeRadialBar = (year, id) => {
   clearToolTip();
   clearRadialBar();
-  clearCareerRadialBar();
+  // clearCareerRadialBar();
+
   radialBar(year);
 };

@@ -1,4 +1,5 @@
 import { makeAreaChart, clearAreaChart } from "./areaChart.js";
+import { bolt } from "./svgMakers.js";
 
 const closeModal = () => {
   d3.select("#modal").style("display", "none");
@@ -29,17 +30,12 @@ export const makeModalCloseBtn = () => {
 export const makeModalContent = (song, count) => {
   let modal = d3.select("#modal-content");
 
-  let div = modal
-    .append("div")
-    .append("div")
-    .attr("class", "modal-data");
-
-  div.append("h3").text(`${song}`);
-  div.append("p").text(`Played ${count} times`);
-
   modal
     .append("svg")
     .attr("class", "selectedAreaChart")
     .attr("id", "modal-line-chart");
+
+  modal.append("div").attr("class", "bolt");
+  bolt();
   makeAreaChart(song);
 };
