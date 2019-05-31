@@ -40,20 +40,22 @@ const resizeForMobile = () => {
   let availWidth = window.screen.availWidth;
   let radial = d3.select(".bar-fixed");
   let bubble = d3.select(".bubble-fixed");
-  let scroller = d3.select(".scroller-text");
+  let modal = d3.select("#modal");
   if (availWidth <= "425") {
     mobileFlag = true;
     d3.selectAll("#sections .card-container").style("max-width", "95%");
     radial.style("top", "5%");
     bubble.style("top", "5%");
+    modal.style("height", "60%");
     bubble.style("left", "120px");
     d3.selectAll(".debut-links")
       .style("font-size", "2em")
       .attr("classs", "bold");
     d3.select("#sections").style("width", "90%");
-    scroller.style("width", "80%");
-    scroller.style("position", "unset");
-    scroller.style("margin", "auto");
+    d3.selectAll(".scroller-text")
+      .style("width", "80%")
+      .style("position", "unset")
+      .style("margin", "auto");
     d3.selectAll(".scroller-text div")
       .style("max-width", "100%")
       .style("font-size", "2em");
@@ -144,21 +146,19 @@ mainContent();
 
 // SCROLL FUNCTION called on scroll into career radial chart
 const careerRadial = async () => {
-  reveal("career-radial-bar-container", ".");
-
   clearTicks();
   removeFixedStyle();
   hideYearCount();
   hide("timeline-container");
   if (!careerRadialMade) {
     makeRadialBar("career");
+    reveal("career-radial-bar-container", ".");
     careerRadialMade = true;
   }
 };
 
 //SCROLL FUNCTION called on scroll into career bubble chart
 const careerBubble = async () => {
-  reveal("career-chart-container", ".");
   clearTicks();
   showYearCount();
   removeFixedStyle();
@@ -167,6 +167,7 @@ const careerBubble = async () => {
   if (!careerBubbleMade) {
     careerBubbleMade = true;
     makeBubbleChart(data, "career-chart", "", 400, 600);
+    reveal("career-chart-container", ".");
   }
 };
 
@@ -181,8 +182,9 @@ const careerSpiral = async () => {
 //Scroll Function called on scroll into each div with id=${year} > 1964
 const yearTotals = async year => {
   //reset Career flags when entering year content
+  //bubble chart will reanimate on upward scroll but radial bar chart will not
   careerBubbleMade = false;
-  careerRadialMade = false;
+  careerRadialMade = true;
   hideYearCount();
   reveal("timeline-container");
   styleFixedContainer();

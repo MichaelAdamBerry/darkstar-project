@@ -53,6 +53,7 @@ const makeChart = (data, id, year, width, height) => {
     widthVar = 168;
     viewBoxX = 62;
     translateSVG = translateSVG + 3;
+
     d3.select(".career-chart-container div.stealie-absolute")
       .style("max-width", "91%")
       .style("width", "91%")
@@ -233,9 +234,7 @@ const makeChart = (data, id, year, width, height) => {
     .attr("height", 28)
     .attr("x", 0)
     .attr("y", -6)
-    .style("stroke", "var(--trippy-blues-1)")
-    .style("fill", "var(--site-white)")
-    .style("stroke-width", "1px");
+    .style("fill", "var(--site-white)");
   //.style("box-shadow", "2px 2px 2px var(--site-black)");
 
   legend
@@ -271,8 +270,7 @@ const makeChart = (data, id, year, width, height) => {
         "transform",
         `translate(${legendPosition.cx + 13 + padding},${legendPosition.cy +
           padding})`
-      )
-      .attr("stroke", "var(--p1)");
+      );
   }
 
   legend
@@ -282,7 +280,8 @@ const makeChart = (data, id, year, width, height) => {
     .style("text-anchor", "start")
     .attr("fill", "var(--site-black)")
     .text(`600`)
-    .style("font-size", ".3em");
+    .style("font-size", ".3em")
+    .style("font-family", `"Roboto", sans serif`);
 
   legend
     .append("text")
@@ -291,7 +290,8 @@ const makeChart = (data, id, year, width, height) => {
     .style("text-anchor", "start")
     .attr("fill", "var(--site-black)")
     .text(`300`)
-    .style("font-size", ".3em");
+    .style("font-size", ".3em")
+    .style("font-family", `"Roboto", sans serif`);
 
   legend
     .append("text")
@@ -300,7 +300,8 @@ const makeChart = (data, id, year, width, height) => {
     .style("text-anchor", "start")
     .attr("fill", "var(--site-black)")
     .text(`100`)
-    .style("font-size", ".3em");
+    .style("font-size", ".3em")
+    .style("font-family", `"Roboto", sans serif`);
 
   legend
     .style("visibility", "hidden")
@@ -327,12 +328,12 @@ const makeChart = (data, id, year, width, height) => {
         title: "1 Sphere = 1 Song"
       },
       //can use x, y directly instead of data
-      x: 95,
-      y: 34,
+      x: 65.6,
+      y: 71.5,
       className: "show-bg",
 
-      dx: -50,
-      dy: 18
+      dx: -20.8,
+      dy: 5
     },
     {
       note: {
@@ -343,20 +344,20 @@ const makeChart = (data, id, year, width, height) => {
       //can use x, y directly instead of data
 
       className: "show-bg",
-      y: 29,
-      x: 155,
-      dy: 50,
-      dx: 82
+      x: 198,
+      y: 61.4,
+      dx: 39.6,
+      dy: 9
     }
   ];
 
   const makeAnnotations = d3
     .annotation()
-    .editMode(false)
+    .editMode(true)
     .notePadding(5)
     .type(type)
     .annotations(annotations);
-  if (id !== "bubbleChart") {
+  if (id !== "bubbleChart" && availWidth > 425) {
     svg
       .append("g")
       .attr("class", "annotation-group")

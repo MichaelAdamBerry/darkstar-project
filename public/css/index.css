@@ -370,7 +370,7 @@ p.drop-letter::first-letter {
   font-size: 3em;
   float: left;
   margin-top: -0.15em;
-  font-family: "Bungee Outline", cursive;
+  font-family: "Roboto", sans-serif;
   color: var(--p1);
 }
 
@@ -679,7 +679,7 @@ text.annotation-note-title {
 }
 
 path.connector {
-  stroke: var(--trippy-blues-3);
+  stroke: var(--p1);
 }
 
 path.note-line {

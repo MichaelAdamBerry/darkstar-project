@@ -273,8 +273,8 @@ export const radialBar = async year => {
 
   labelText.each(setToolTip);
 
-  if (year === "career" || availWidth < 425) {
-    labelText.style("font-size", ".325em");
+  if (year !== "career" && availWidth < 425) {
+    labelText.style("font-size", ".45em");
   } else {
     labelText.style("font-size", ".32em");
   }
@@ -407,7 +407,7 @@ export const radialBar = async year => {
       .style("font-style", "italic");
   }
 
-  if (year !== "career") {
+  if (year != "career") {
     tooltip.style("font-size", ".7em");
   } else {
     tooltip.style("font-size", "1em");
