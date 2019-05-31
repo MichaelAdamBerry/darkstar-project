@@ -353,7 +353,7 @@ const makeChart = (data, id, year, width, height) => {
 
   const makeAnnotations = d3
     .annotation()
-    .editMode(true)
+    .editMode(false)
     .notePadding(5)
     .type(type)
     .annotations(annotations);

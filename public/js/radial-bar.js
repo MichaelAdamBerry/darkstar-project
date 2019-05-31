@@ -305,8 +305,8 @@ export const radialBar = async year => {
     .attr("y", -40)
     .attr("id", "radial-instructions-rect")
     .attr("class", "mobile-hide")
-    .style("stroke", "var(--site-black)")
-    .style("stroke-opacity", ".4")
+    .style("stroke", "var(--p1)")
+    .style("stroke-width", ".5px")
     .style("fill", "var(--site-white)")
     .style("fill-opacity", ".8")
     .style("box-shadow", "2px 2px 5px var(--site-black)");
@@ -321,6 +321,7 @@ export const radialBar = async year => {
     .attr("class", "mobile-hide")
     .style("text-anchor", "start")
     .style("font-size", ".25em")
+    .style("font-family", `"Roboto", sans-serif`)
     .html(
       `Hover over 
         <tspan x="${position.x}" y="${position.y + 5}">song bar for</tspan>

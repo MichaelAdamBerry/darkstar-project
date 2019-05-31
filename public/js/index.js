@@ -124,8 +124,8 @@ const mainContent = () => {
     `
     <p class="drop-letter">
             Even for die hard deadheads The Grateful Dead can be difficult to categorize. 
-            For the uninitiated, the shear volume of recordings and songs is enough 
-            to be scared away. As music critic  Tim Sommer sums up nicely--
+            For the uninitiated, the sheer volume of recordings and songs is enough 
+            to be scared away. As  <a href="https://observer.com/2015/07/how-i-learned-to-stop-worrying-and-listen-to-the-grateful-dead/">music critic  Tim Sommer sums up nicely--</a>
             <blockquote> 
             “Loving the Grateful Dead is like ridin’ that train to Hogwarts—
             you must believe that the track exists in order to climb aboard.”
@@ -218,7 +218,7 @@ function scroll(n, offset, func) {
 const scrollDiv = () => {
   d3.selectAll(".scroll-trigger")
     .append("div")
-    .style("min-height", "400px");
+    .attr("class", "scroll-padding-div");
 };
 scrollDiv();
 makeTimeline();

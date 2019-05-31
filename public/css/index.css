@@ -154,6 +154,15 @@ body {
   line-height: 1.8em;
 }
 
+.explainer-text blockquote {
+  max-width: 500px;
+  font-size: larger;
+}
+
+.explainer-text a {
+  color: var(--site-black);
+}
+
 .explainer-text h3 {
   margin: 0 0 0 0;
   text-align: center;
@@ -163,7 +172,7 @@ body {
   position: relative;
   width: 10%;
   max-width: 100px;
-  min-height: 100%;
+  /* min-height: 100%; */
   visibility: hidden;
 }
 
@@ -230,6 +239,15 @@ body {
 }
 #timeline-container span {
   padding-left: 0.5em;
+}
+
+.lead div.scroll-padding-div {
+  min-height: 100px;
+  max-height: 100px;
+}
+
+.scroll-padding-div {
+  min-height: 400px;
 }
 
 #graph {
@@ -349,7 +367,7 @@ ol li {
 .me {
   width: 650px;
   margin: auto;
-  font-size: smaller;
+
   margin: auto;
   font-family: "Roboto", sans-serif;
 }
@@ -683,7 +701,7 @@ path.connector {
 }
 
 path.note-line {
-  stroke: var(--trippy-blues-1);
+  stroke: var(--p1);
 }
 
 div.lead {
