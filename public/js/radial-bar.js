@@ -16,9 +16,10 @@ const colorsA = [
   "var(--p5)"
 ];
 
-export const clearRadialBar = () => {
+export const clearRadialBar = year => {
   const el = d3.select("#radial-bar");
   el.selectAll("*").remove();
+  const years = d3.selectAll(`.charts-year-bar-${year} svg`).remove();
 };
 
 const clearToolTip = () => {
@@ -62,41 +63,59 @@ const topFiveSongs = async yearData => {
 
 export const radialBar = async year => {
   let { availWidth } = window.screen;
+  let textStart = "-5";
 
-  let songData, data, width, height, id, songVar, top, fill, left, arcPadding;
+  let songData,
+    className,
+    data,
+    width,
+    height,
+    id,
+    songVar,
+    top,
+    fill,
+    left,
+    arcPadding,
+    labelRectX;
 
   if (year === "career") {
     songData = await totalSongData();
     data = await topTenSongs(songData);
-    width = 200;
-    height = 110;
+    width = 120;
+    height = 122;
     id = "#career-radial-bar";
+    className = "career-bar-svg";
     songVar = "song";
     fill = "#39363470";
-    top = 60;
-    left = 60;
+    top = 63;
+    textStart = -5;
+    left = 65;
     arcPadding = 7;
+    labelRectX = -57;
   } else {
     songData = await getSongData(year);
     data = await topFiveSongs(songData);
     width = 120;
-    height = 110;
-    id = "#radial-bar";
+    height = 122;
+    textStart = -1;
+    className = `year-bar-svg`;
+    id = `.charts-year-bar-${year}`;
     songVar = "name";
-    top = 60;
+    top = 70;
     fill = "var(--trippy-blue-4)";
     left = 60;
-    arcPadding = 5;
+    arcPadding = 6;
+    labelRectX = -56;
   }
   console.log("screen width", availWidth);
   let viewBoxWidthVar;
   let stealieContainer = d3.select("#career-radial-bar div.stealie-absolute");
   if (availWidth <= 425) {
-    viewBoxWidthVar = 125;
-    stealieContainer.style("width", "82%").style("padding-top", "0%");
+    viewBoxWidthVar = width;
+    stealieContainer.style("width", "100%").style("padding-top", "153px");
   } else {
     viewBoxWidthVar = width;
-    stealieContainer.style("padding-top", "0").style("width", "500px");
+    stealieContainer.style("padding-top", "153px").style("width", "338px");
   }
 
   // geometry  and chart variables
@@ -124,7 +143,8 @@ export const radialBar = async year => {
     .select(`${id}`)
     .append("svg")
     .attr("id", "radial-chart-svg")
-    .attr("viewBox", `0 0 ${viewBoxWidthVar} ${height + topPadding}`)
+    .attr("class", className)
+    .attr("viewBox", `3 0 ${viewBoxWidthVar} ${height + topPadding}`)
     .style("margin-left", "0px")
     .append("g")
     .style("transform", `translate(${left}px ,${top}px)`);
@@ -153,22 +173,9 @@ export const radialBar = async year => {
     .startAngle(0)
     .endAngle((d, i) => scale(d));
 
-  let titleBgRect = {
-    width: 205,
-    x: 100,
-    y: height - 80,
-    height: 100
-  };
-
-  let titleBgCirc = {
-    r: 25,
-    cx: 90,
-    cy: 40
-  };
-
   let textBgRect = {
-    width: 50,
-    x: -50,
+    width: 56,
+    x: labelRectX,
     y: 0 - height / 2,
     height: height / 2
   };
@@ -195,51 +202,6 @@ export const radialBar = async year => {
 
   axialAxis.append("line").attr("x2", chartRadius);
 
-  const titleBg = svg.append("g");
-  titleBg
-    .append("circle")
-    .attr("class", "mobile-hide")
-    .attr("r", titleBgCirc.r)
-    .attr("cx", titleBgCirc.cx)
-    .attr("cy", titleBgCirc.cy)
-    .style("stroke", "var(--site-black)")
-    .style("stroke-width", ".3px")
-    .style("stroke-opacity", ".4")
-    .style("fill", "var(--p5)")
-    .style("fill-opacity", ".95");
-
-  titleBg
-    .append("text")
-    .attr("class", "bold")
-    .attr("class", "mobile-hide")
-    .attr("x", titleBgCirc.cx - 11)
-    .attr("y", titleBgCirc.cy - 7)
-    .attr("fill", "var(--site-white)")
-    .text("Top 10 ")
-    .style("font-size", ".3em")
-    .style("text-decoration", "underline");
-
-  titleBg
-    .append("text")
-    .attr("class", "bold")
-    .attr("class", "mobile-hide")
-    .attr("x", titleBgCirc.cx - 22)
-    .attr("y", titleBgCirc.cy)
-    .attr("fill", "var(--site-white)")
-    .text("Most Played Songs")
-    .style("font-size", ".3em")
-    .style("text-decoration", "underline");
-
-  titleBg
-    .append("text")
-    .attr("class", "bold")
-    .attr("class", "mobile-hide")
-    .attr("x", titleBgCirc.cx - 12)
-    .attr("y", titleBgCirc.cy + 7)
-    .attr("fill", "var(--site-white)")
-    .text("1965 - 1995")
-    .style("font-size", ".3em");
-
   const textBg = svg.append("g");
 
   textBg
@@ -260,23 +222,30 @@ export const radialBar = async year => {
     .data(data)
     .enter()
     .append("text")
-    .attr("x", -2)
+    .attr("x", textStart)
     .attr("y", (d, i) => -getOuterRadius(i))
     .style("fill", (d, i) => color2(i))
     .transition()
     .delay((d, i) => i * 400)
-    .text((d, i) => `${d[songVar]}`)
+    .text((d, i) => {
+      let str = d[songVar];
+      if (str.length < 22) {
+        return str;
+      } else if (str.length > 22) {
+        return `${str.slice(0, 18)}...`;
+      }
+    })
     .attr("text-anchor", "end")
-    .attr("class", "bold")
+    .attr("class", "roboto")
 
     .style("cursor", "pointer");
 
   labelText.each(setToolTip);
 
   if (year !== "career" && availWidth < 425) {
-    labelText.style("font-size", ".45em");
+    labelText.style("font-size", ".35em");
   } else {
-    labelText.style("font-size", ".32em");
+    labelText.style("font-size", ".35em");
   }
 
   axialAxis
@@ -292,42 +261,42 @@ export const radialBar = async year => {
     )
     .text(d => d.name);
 
-  let position = { x: 77, y: -34 };
-  let rect = { padding: 15, width: 100 };
+  // let position = { x: 77, y: -34 };
+  // let rect = { padding: 15, width: 100 };
 
-  const intstructionsBg = svg.append("g");
+  // const intstructionsBg = svg.append("g");
 
-  intstructionsBg
-    .append("rect")
-    .attr("width", 25)
-    .attr("height", 25)
-    .attr("x", 75)
-    .attr("y", -40)
-    .attr("id", "radial-instructions-rect")
-    .attr("class", "mobile-hide")
-    .style("stroke", "var(--p1)")
-    .style("stroke-width", ".5px")
-    .style("fill", "var(--site-white)")
-    .style("fill-opacity", ".8")
-    .style("box-shadow", "2px 2px 5px var(--site-black)");
+  // intstructionsBg
+  //   .append("rect")
+  //   .attr("width", 25)
+  //   .attr("height", 25)
+  //   .attr("x", 75)
+  //   .attr("y", -40)
+  //   .attr("id", "radial-instructions-rect")
+  //   .attr("class", "mobile-hide")
+  //   .style("stroke", "var(--p1)")
+  //   .style("stroke-width", ".5px")
+  //   .style("fill", "var(--site-white)")
+  //   .style("fill-opacity", ".8")
+  //   .style("box-shadow", "2px 2px 5px var(--site-black)");
 
-  const instructions = svg.append("g").attr("class", "radial-text");
+  // const instructions = svg.append("g").attr("class", "radial-text");
 
-  instructions
-    .append("text")
-    .attr("x", position.x)
-    .attr("y", position.y)
-    .attr("id", "radial-instructions-text")
-    .attr("class", "mobile-hide")
-    .style("text-anchor", "start")
-    .style("font-size", ".25em")
-    .style("font-family", `"Roboto", sans-serif`)
-    .html(
-      `Hover over 
-        <tspan x="${position.x}" y="${position.y + 5}">song bar for</tspan>
-        <tspan x="${position.x}" y="${position.y + 10}">more</tspan>
-        <tspan x="${position.x}" y="${position.y + 15}">information</tspan>`
-    );
+  // instructions
+  //   .append("text")
+  //   .attr("x", position.x)
+  //   .attr("y", position.y)
+  //   .attr("id", "radial-instructions-text")
+  //   .attr("class", "mobile-hide")
+  //   .style("text-anchor", "start")
+  //   .style("font-size", ".25em")
+  //   .style("font-family", `"Roboto", sans-serif`)
+  //   .html(
+  //     `Hover over
+  //       <tspan x="${position.x}" y="${position.y + 5}">song bar for</tspan>
+  //       <tspan x="${position.x}" y="${position.y + 10}">more</tspan>
+  //       <tspan x="${position.x}" y="${position.y + 15}">information</tspan>`
+  //   );
 
   let colorBase = "var(--site-white)";
   let stroke = "#2f2f2f25";
@@ -425,7 +394,7 @@ export const radialBar = async year => {
 
 export const makeRadialBar = (year, id) => {
   clearToolTip();
-  clearRadialBar();
+  clearRadialBar(year);
   // clearCareerRadialBar();
 
   radialBar(year);

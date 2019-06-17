@@ -26,48 +26,99 @@ makeCard();
 
 //appends skull background to the career chart containters and hides them
 
-makeStealie(".career-chart-container");
+makeStealie("#career-bubble-chart");
 makeStealie("#career-radial-bar");
 // hide("stealie-container", ".");
 hide("career-radial-bar-container", ".");
 hide("career-chart-container", ".");
 
 //function invoked immediately after html is constructed
-//detects screen size and makes necessary changes for
+//checks for small screen size and makes changes for
 //svg attributes difficult to target with media queries
 let mobileFlag;
 const resizeForMobile = () => {
   let availWidth = window.screen.availWidth;
-  let radial = d3.select(".bar-fixed");
-  let bubble = d3.select(".bubble-fixed");
   let modal = d3.select("#modal");
   if (availWidth <= "425") {
     mobileFlag = true;
-    d3.selectAll("#sections .card-container").style("max-width", "95%");
-    radial.style("top", "5%");
-    bubble.style("top", "5%");
+    d3.select("#timeline-container").style("display", "none");
+    d3.selectAll("#sections .card-container")
+      .style("width", "90%")
+      .style("margin", "auto");
     modal.style("height", "60%");
-    bubble.style("left", "120px");
+    d3.selectAll(".flex-charts-text").style("display", "block");
+    d3.selectAll(".career-scroll").style("width", "90%");
+    d3.select(".career-radial-bar-container").style("width", "94%");
+    d3.select("career");
+    d3.select(".career-chart-container").style("width", "95%");
+    d3.select("#career-bubble-chart div.stealie-absolute")
+      .style("top", "654px")
+      .style("margin-top", "0")
+      //padding not responding here ?? -- quick fix  --> adjusted in bubbleChart.js
+      .style("padding-top", "0")
+      .style("width", "100%");
+
+    d3.selectAll(".byline").classed("mobile-font width-80", true);
+
+    d3.selectAll(".scroller-div")
+      .style("opacity", ".95")
+      .style("max-width", "100%")
+      .style("margin", "auto")
+      .style("background", "var(--site-white)")
+      .style("min-height", "100vh")
+      .style("padding", "10% 0");
+
+    d3.selectAll(".title").style("max-width", "90%");
+
+    d3.selectAll(".title h3").style("font-size", "150px");
+
+    d3.selectAll(".hero-text")
+      .style("max-width", "90%")
+      .style("min-width", "90%")
+      .style("font-size", "50px");
+
+    d3.selectAll(".explainer-text div.lead")
+      .style("max-width", "90%")
+      .style("margin", "auto")
+      .style("display", "block")
+      .classed("mobile-font", true)
+      .classed("mobile-line-height", true);
+
+    // d3.selectAll("p.mobile-font").style("line-height", "1.8em");
+
     d3.selectAll(".debut-links")
       .style("font-size", "2em")
-      .attr("classs", "bold");
-    d3.select("#sections").style("width", "90%");
+      .attr("classs", "roboto");
+
+    d3.select("#sections").style("width", "100%");
     d3.selectAll(".scroller-text")
-      .style("width", "80%")
+      // .style("width", "80%")
       .style("position", "unset")
       .style("margin", "auto");
+    d3.selectAll(".scroller-text p").style("padding-right", "0");
     d3.selectAll(".scroller-text div")
       .style("max-width", "100%")
-      .style("font-size", "2em");
+      .style("font-size", "1.8em");
+    d3.select(".career-scroll-bubble").style("padding-bottom", "40vh");
+    d3.select("#section-title").style("margin-top", "400px");
+
+    d3.selectAll("#sections div.scroll-trigger")
+      .style("display", "block")
+      .style("height", "2500px")
+      .style("margin-top", "240px");
+    d3.selectAll(".card-flex-container").style("width", "100%");
+    d3.selectAll(".card-container").style("max-width", "95%");
+    d3.selectAll(".charts-year-container-col")
+      .style("width", "100%")
+      .style("margin", "auto")
+      .style("min-height", "1200px")
+      .style("display", "block");
+    d3.selectAll(".charts-year-container-col div")
+      .style("max-width", "100%")
+      .style("margin-left", "0");
+    d3.select(".me p").classed("margin-t-none", true);
   } else {
     mobileFlag = false;
-    d3.selectAll("#sections .card-container").style("max-width", "75%");
-    radial.style("top", "50%");
-    radial.style("right", "0");
-    radial.style("height", "50vh");
-    bubble.style("top", "30px");
-    bubble.style("height", "50vh");
-    bubble.style("right", "0");
   }
 };
 
@@ -118,31 +169,38 @@ const activeTicks = year => {
 let careerRadialMade = false;
 let careerBubbleMade = false;
 
-//SCROLL FUNCTION called lead in text
-const mainContent = () => {
-  d3.select(".lead").html(
-    `
-    <p class="drop-letter">
-            Even for die hard deadheads The Grateful Dead can be difficult to categorize. 
-            For the uninitiated, the sheer volume of recordings and songs is enough 
-            to be scared away. As  <a href="https://observer.com/2015/07/how-i-learned-to-stop-worrying-and-listen-to-the-grateful-dead/">music critic  Tim Sommer sums up nicely--</a>
-            <blockquote> 
-            “Loving the Grateful Dead is like ridin’ that train to Hogwarts—
-            you must believe that the track exists in order to climb aboard.”
-            </blockquote>
-    </p>
-    <div class="img-container">
-      <img src="images/group.jpg" alt="group in 1977"/>
-    </div>
-    <p>
-            These visualizations use data from archive.com and setlist.fm 
-            to examine what songs were played most, 
-                        the size of the repetoir,
-                        and the lifespan of each song.`
-  );
-};
+// //SCROLL FUNCTION called lead in text
+// const mainContent = () => {
+//   let className = mobileFlag === true ? "mobile-font" : "desktop-font";
+//   let blockWidth = mobileFlag === true ? "width-80" : "width-500";
+//   let lineheight =
+//     mobileFlag === true ? "mobile-line-height" : "desktop-line-height";
+//   d3.select(".lead")
+//   .classed(lineheight)
+//   .html(
+//     `
+//     <p class="${className} margin-t-lg">
+//             Even for die hard deadheads The Grateful Dead can be difficult to categorize.
+//             For the uninitiated, the sheer volume of recordings and songs is enough
+//             to be scared away. As  <a href="https://observer.com/2015/07/how-i-learned-to-stop-worrying-and-listen-to-the-grateful-dead/">music critic  Tim Sommer sums up nicely--</a></p>
+//             <div class="blockquote-container">
+//             <blockquote class="margin-t-lg margin-b-lg ${className} ${blockWidth}">Loving the Grateful Dead is like ridin’ that train to Hogwarts—
+//             you must believe that the track exists in order to climb aboard.
+//             </blockquote>
+//             </div>
+//     <div class="img-container">
+//       <img src="images/group.jpg" alt="group in 1977"/>
+//     </div>
+//     <p class="${className} margin-t-lg">
+//             These visualizations use data from archive.com and setlist.fm
+//             to examine what songs were played most,
+//                         the size of the repetoir,
+//                         and the lifespan of each song.
+//     </p>`
+//   );
+// };
 
-mainContent();
+// mainContent();
 
 // SCROLL FUNCTION called on scroll into career radial chart
 const careerRadial = async () => {
@@ -195,7 +253,7 @@ const yearTotals = async year => {
   const obj = await staticData.find(d => d.year === year);
   const { unique, uniqueChange, count, countChange } = obj;
 
-  makeText(year, unique, count);
+  makeText(year, unique, count, mobileFlag);
   makeYearBubbleChart(yearTotal.songs, "bubbleChart", year, 400, 600);
   console.log("yearTotals fires with year as ", year);
   makeRadialBar(year);
@@ -227,10 +285,10 @@ hideYearCount();
 makeModalCloseBtn();
 
 //animates / displays the radial bar chart
-new scroll("1963", "1%", careerRadial);
+new scroll("1963", "80%", careerRadial);
 
 //animates / displays the career bubble chart
-new scroll("1964", "10%", careerBubble);
+new scroll("1964", "60%", careerBubble);
 
 //TODO career spiral histogram
 // new scroll("1964", "10%", careerSpiral);
@@ -239,6 +297,6 @@ years.forEach(year => {
   if (year === "1965") {
     new scroll(year, "10%", yearTotals);
   } else {
-    new scroll(year, "35%", yearTotals);
+    new scroll(year, "99%", yearTotals);
   }
 });

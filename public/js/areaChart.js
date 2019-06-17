@@ -33,7 +33,7 @@ export const makeAreaChart = async (
   const yScale = d3
     .scaleLinear()
     .domain(d3.extent(songData, d => d.count))
-    .range([height - margin.bottom, margin.top]);
+    .range([height, margin.top]);
   const xScale = d3
     .scaleLinear()
     .domain([1965, 1995])
@@ -83,7 +83,7 @@ export const makeAreaChart = async (
 
   //variable for separation of styles between main career chart
   //and top five chart by year in yearly chart
-  const translateChartY = 120;
+  const translateChartY = 90;
 
   let header = svg.append("g");
 
@@ -275,7 +275,7 @@ export const makeAreaChart = async (
     .data(annotationsLegend)
     .enter()
     .append("text")
-    .attr("class", "bold")
+    .attr("class", "roboto")
     .style("font-size", "15px")
     .attr("class", "legend")
     .text(function(d) {

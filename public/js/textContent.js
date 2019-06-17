@@ -332,7 +332,7 @@ export const makeTimeline = () => {
   for (let i = 1965; i <= 1995; i++) {
     child
       .append("span")
-      .attr("class", "year-tick")
+      .attr("class", "year-tick robo")
       .attr("id", `year-tick-${i}`)
       .html(i.toString());
   }
@@ -348,11 +348,13 @@ const clearDebuts = year => {
   d.selectAll("*").remove();
 };
 
-export const makeText = async (year, uniqueSongs, totalShows) => {
+export const makeText = async (year, uniqueSongs, totalShows, mobileFlag) => {
   clearBarChart(year);
   clearTotalSongs(year);
   clearTotalShows(year);
   clearDebuts(year);
+
+  let fontSize = mobileFlag === true ? "25px" : "13px";
 
   //centers numbers for 2 or 3 digits within circle
   let showsXPos = totalShows > 99 ? 8.3 : 10;
@@ -361,9 +363,9 @@ export const makeText = async (year, uniqueSongs, totalShows) => {
   d3.select(`svg.card-${year}`)
     .append("text")
     .attr("class", "card-text")
-    .attr("class", "bold")
+    .attr("class", "roboto")
     .attr("x", songsXPos)
-    .attr("y", 104.5)
+    .attr("y", 115)
     .text(uniqueSongs)
     .style("font-size", ".4em")
     .style("fill", "var(--site-white)");
@@ -371,9 +373,9 @@ export const makeText = async (year, uniqueSongs, totalShows) => {
   d3.select(`svg.card-${year}`)
     .append("text")
     .attr("class", "card-text")
-    .attr("class", "bold")
+    .attr("class", "roboto")
     .attr("x", showsXPos)
-    .attr("y", 128)
+    .attr("y", 137)
     .text(totalShows)
     .style("font-size", ".4em")
     .style("fill", "var(--site-white)");
@@ -384,18 +386,25 @@ export const makeText = async (year, uniqueSongs, totalShows) => {
       const urlRoot = `https://archive.org/details/AllGratefulDeadOriginalSongDebuts66-95/`;
       const arr = debuts[year];
       debutContainer
-        .append("h4")
+        .append("p")
+        .attr("class", "margin-t-md")
+        .attr("class", "margin-b-xs margin-t-md")
+        .style("font-size", fontSize)
+
+        .style("font-weight", "bold")
         .html(
-          `<span class="larger">${
+          `<span>${
             arr.length
           }</span> Original Songs First Played in '${year.slice(2)}`
         );
       arr.forEach((el, i) =>
         debutContainer
           .append("a")
-          .attr("class", "debut-box")
+          .attr("class", "debut-box margin-b-xs roboto")
           .attr("target", "none")
           .attr("href", `${urlRoot}${el.link}`)
+          .attr("class", "gray")
+          .style("font-size", fontSize)
           .text(`${el.song}, `)
       );
     }

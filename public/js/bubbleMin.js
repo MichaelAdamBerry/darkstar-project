@@ -2,21 +2,15 @@ import { showModal, makeModalContent } from "./modal.js";
 
 const colorsA = ["#991d18", "#791d38", "#591d58", "#391d78", "#191d98"];
 
-const clearBubbleChart = () => {
-  const svg = d3.select("#bubbleChart");
-  svg.selectAll("*").remove();
-};
-
-const clearCareerBubble = () => {
-  const svg = d3.select("#career-chart");
-  svg.selectAll("*").remove();
+const clearBubbleChart = year => {
+  const svg = d3.select(`.charts-year-bubble-${year} svg`).remove();
+  //const svg = d3.selectAll(".charts-year-bubble").remove();
 };
 
 const makeChart = (data, id, year, width, height) => {
   //clear svg before building new
 
   clearBubbleChart();
-  clearCareerBubble();
 
   const colorScale = d3.scaleOrdinal().range(colorsA);
 
@@ -26,14 +20,8 @@ const makeChart = (data, id, year, width, height) => {
       .size([150, 150])
       .padding(10)(d3.hierarchy({ children: data }).sum(d => d.count));
 
-  //const shuffledData = d3.shuffle(data);
-  const root = pack(data);
   const shuffleRoot = pack(d3.shuffle(data));
   const shuffleRootData = shuffleRoot.leaves();
-
-  if (year) {
-    const activeYear = d3.select(".active-year").text(`All Songs - ${year}`);
-  }
 
   let selector = id === "bubbleChart" ? "active-title" : "active-title-main";
   const title = d3.select(`.${selector}`);
@@ -41,24 +29,26 @@ const makeChart = (data, id, year, width, height) => {
   let tranlateLeafY = id === "bubbleChart" ? 0 : -11;
   let translateX = id === "bubbleChart" ? 60 : 60;
   let widthVar = id === "bubbleChart" ? 155 : 300;
-  let heightVar = id === "bubbleChart" ? 200 : 200;
+  let heightVar = id === "bubbleChart" ? 155 : 200;
   let translateSVG = id === "bubbleChart" ? 4 : 4;
   let viewBoxX = id === "bubbleChart" ? 60 : 0;
 
   const availWidth = window.screen.availWidth;
 
-  if (availWidth <= 425) {
-    widthVar = 168;
-    viewBoxX = 62;
-    translateSVG = translateSVG + 3;
-    d3.select(".career-chart-container div.stealie-absolute")
-      .style("max-width", "91%")
-      .style("width", "91%")
-      .style("margin-left", "0");
-  }
+  // if (availWidth <= 425) {
+  //   widthVar = 168;
+  //   viewBoxX = 62;
+  //   translateSVG = translateSVG + 3;
+  //   d3.select(".career-chart-container div.stealie-absolute")
+  //     .style("max-width", "91%")
+  //     .style("width", "91%")
+  //     .style("margin-left", "0");
+  // }
 
-  const svg = d3.select(`#${id}`);
-  svg
+  const div = d3.select(`.charts-year-bubble-${year}`);
+  const svg = div
+    .append("svg")
+    .attr("class", "charts-year-bubble")
     .attr("viewBox", `${viewBoxX} 0 ${widthVar} ${heightVar}`)
     // .style("width", widthVar)
     // .style("max-width", "1000px")
@@ -66,7 +56,7 @@ const makeChart = (data, id, year, width, height) => {
     //.style("font-size", "12px")
     .attr("font-family", "sans-serif")
     .attr("text-anchor", "middle")
-    .style("transform", `translate(${translateSVG}%, 0)`);
+    .style("transform", `translate(0, 0)`);
 
   let tooltip = d3
     .select(`body`)
@@ -171,7 +161,6 @@ const makeChart = (data, id, year, width, height) => {
 };
 
 export const makeYearBubbleChart = (songs, id, year, width, height) => {
-  clearBubbleChart();
-
+  clearBubbleChart(year);
   makeChart(songs, id, year, width, height);
 };

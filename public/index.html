@@ -5,7 +5,7 @@
     <title>Grateful Data</title>
     <link rel="icon" href="favicon.png" sizes="16x16 32x32" type="image/png">
     <link rel="stylesheet" href="./css/index.css" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather|Roboto:500|Bungee+Inline|Bungee+Outline|Shadows+Into+Light" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900|Roboto:500|Bungee+Inline|Bungee+Outline|Shadows+Into+Light" rel="stylesheet">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.min.js"></script>
@@ -17,15 +17,13 @@
         </div>
     </div>
         <div id="hero-container">
-                <div class="title">
-                        <h3>GRATEFUL DATA</h3>
+                <div class="title margin-t-xl">
+                        <h3 class="margin-t-b-none">GRATEFUL DATA</h3>
                     </div>
                 <div class="full-height">
-                    <div id="hero-text">
-                        <h3 class="bold">What 30 Years of Set List Data Can Tell Us About the Grateful Dead</h3>
+                    <div class="hero-text">
+                        <h3 class="roboto margin-t-b-none">What 30 Years of Set List Data Can Tell Us About the Grateful Dead</h3>
                     </div>
-                    
-
                 </div>
          <div id="hero">
              <img 
@@ -40,31 +38,55 @@
         
     </div>
     <div class="career-container">
-            
+        <div class="byline">
+            <div class="me black roboto">
+                <p>Created By <a href="adamberry.dev" class="margin-t-b-none black">Adam Berry</a></p>
+            </div>
             <div class="twitter">
                     <a class="twitter-share-button"
-            href="https://twitter.com/intent/tweet?text=Grateful%20Data%20~~%20Visualizing%20the%20Setlists%20of%20the%20Grateful%20Dead%20&via=_Adam_Berry"
-            data-size="large">
-            Tweet</a>
-        </div>
-        <div class="me">
-        <p>Created By <a href="adamberry.dev">Adam Berry</a></p>
-    </div>          
+                        href="https://twitter.com/intent/tweet?text=Grateful%20Data%20~~%20Visualizing%20the%20Setlists%20of%20the%20Grateful%20Dead%20&via=_Adam_Berry"
+                        data-size="large">
+                        Tweet
+                    </a>
+            </div> 
+        </div>          
         <div class="explainer-text">
-            <div id="1962" class="lead scroll-trigger">                
+            <div id="1962" class="lead scroll-trigger margin-t-none">
+                    <p class="margin-t-lg">
+                            Even for die hard deadheads The Grateful Dead can be difficult to categorize. 
+                            For the uninitiated, the sheer volume of recordings and songs is enough 
+                            to be scared away. As  <a href="https://observer.com/2015/07/how-i-learned-to-stop-worrying-and-listen-to-the-grateful-dead/">music critic  Tim Sommer sums up nicely--</a></p>
+                            <div class="blockquote-container">
+                            <blockquote class="margin-t-lg margin-b-lg ${className} ${blockWidth}">"Loving the Grateful Dead is like ridin’ that train to Hogwarts—- you must believe that the track exists in order to climb aboard."
+                            </blockquote>
+                            </div>
+                    <div class="img-container">
+                      <img src="images/group.jpg" alt="group in 1977"/>
+                    </div>
+                    <p class="margin-t-lg">
+                            These visualizations use data from archive.com and setlist.fm 
+                            to examine what songs were played most, 
+                                        the size of the repetoir,
+                                        and the lifespan of each song.
+                    </p>
+
             </div>
-                <ol class="chart-list">
-                    <li>
+            <section class="charts">
+                    <div class="flex-charts-text"> <!-- radial bar chart and text container-->
                         <div id="1963" class="career-scroll">
+                                <div id="chart-title-text">
+                                    <h4>Top 10 <br/>Most Played Songs<br/> 1965-1995</h4>
+                                    <p class="margin-t-sm margin-b-lg gray">Hover over a song for more information</p>
+                                </div>
                                 <div  class="career-radial-bar-container">
                                     <div id="career-radial-bar"></div>
                                 </div>
-                        </div>
+                         </div>  <!-- #1963 -->
                         <div class="scroller-div" id="scroller-div-radial-bar">
                             <div class="scroller-text bar-scroll">
                                 <div>
-                                    <h3>Most Played Songs</h3>
-                                    <p>This radial bar chart shows the top ten most 
+                                    <h4 class="margin-b-sm margin-t-none">Most Played Songs</h4>
+                                    <p class="margin-t-b-none">This radial bar chart shows the top ten most 
                                         played songs by the Grateful Dead, excluding
                                         instrumentals Drums and Space which were played
                                         at every show from the early 80's onward. The length 
@@ -74,42 +96,43 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <h3>Observations</h3>
-                                    <p> All songs that made the top ten 
+                                    <h4 class="margin-b-sm margin-t-lg">Observations</h4>
+                                    <p class="margin-t-b-none"> All songs that made the top ten 
                                         list <mark>debuted within the first seven years of the Dead's career</mark> - six from the 60's, 
                                         2 from 1971, and 2 from 1972 </p>
-                                    <p> The 1960's gave us four covers -- Good Lovin'('65), I Know You Rider('65), 
+                                    <p class="margin-t-sm margin-b-none"> The 1960's gave us four covers -- Good Lovin'('65), I Know You Rider('65), 
                                         Not Fade Away('68) and Me and My Uncle ('67') as well as some of the earliest 
                                         original songs -- The Other One('67), and China Cat Sunflower('68)</p>
-                                    <p>1970 saw fan favorites Sugar Magnolia and Truckin' debut</p>
-                                    <p><mark>1971 was the last year for a top-ten song to debut</mark> and the
+                                    <p class="margin-t-b-none">1970 saw fan favorites Sugar Magnolia and Truckin' debut</p>
+                                    <p class="margin-b-sm margin-t-sm"><mark>1971 was the last year for a top-ten song to debut</mark> and the
                                         birthyear of Jack Straw and the most played song Playin' in the Band
                                     </p>
-                                    <p>As the Dead introduced new songs into their performances. Setlists became more varied.</p>
+                                    <p class="margin-t-b-none">As the Dead introduced new songs into their performances. Setlists became more varied.</p>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div id="1964" class="career-scroll">
-                            <div id="year-count-container">
-                                    <div id="year-count"></div>
-                            </div>
-                            <div id="song-count-container">
-                                <div id="song-count"></div>
-                            </div>
+                            </div> <!-- .bar-scroll -->
+                        </div><!-- .scroller-div -->
+                    </div> <!-- .flex-charts-text -->
+                    
+                    <div class="flex-charts-text"> <!--bubble chart and text container-->
+                        <div id="1964" class="career-scroll career-scroll-bubble">
+                                <div id="chart-title-text">
+                                        <h4>Total Setlist of <br/>Unique Songs Played<br/> 1965-1995</h4>
+                                        <p class="margin-t-sm margin-b-sm gray">To see song history select a sphere</p>
+                                        <p class="margin-t-none margin-b-sm black">1 Sphere = 1 Song</p>
+                                    </div>
                             <div  class="career-chart-container"> 
+                                    <div id="career-bubble-chart"></div>
                                     <svg id="career-chart"></svg>
                             </div>
                         </div>
-                        <div class="scroller-div">
+                        <div class="scroller-div" id="scroller-div-bubble-chart">
                             <div class="scroller-text bubble-scroll">
-                                    <div>
-                                    <h3>The Complete Songs Scaled by Times Played</h3>
-                                    <p>This chart displays the incredible volume of the Grateful Dead's Career 
+                                <div>
+                                    <h4 class="margin-t-none margin-b-md">All Songs Scaled by Times Played</h4>
+                                    <p class="margin-t-none margin-b-md"> This chart displays the incredible volume of the Grateful Dead's Career 
                                         repetoir. Spheres represent every unique song played
                                         with the diameter sized by number of times played.</p>
-                                    <p>Select any song from either chart to see the songs performance history,
+                                    <p class="margin-t-b-none">Select any song from either chart to see the songs performance history,
                                         indicating the debut year, peak year, and last year played.
                                         All of the bands most played songs peaked in the early 70's.
                                         This indicates sets tended to include fewer deviations in songs from 
@@ -117,49 +140,27 @@
                                         amount of unique songs that were played in a given year</mark>.
                                     </p>
                                 </div>
-                                    <div>
-                                    <p> **Note on data from 1965-1967 - Many shows and setlists from 
+                                <div>
+                                    <p class="gray margin-t-lg"> **Note on data from 1965-1967 - Many shows and setlists from 
                                         the earliest years of the bands existence is incomplete.
                                         Data can be trusted for accuracy from 1968 onward.
                                     </p>
                                 </div>
-                                </div>
                             </div>
-                        </div> 
-                    </li>
-                </ol>
-            <div class="explainer-text">
-                <h4 id="section-title" class="bold"> Dead Through The Years</h4>
-                <p>A timeline of the evolution 
-                    of the Dead's setlist and most played songs
-                    each year by the year. 
+                        </div>
+                    </div> <!-- .flex-charts-text -->
+                </section>
+            </div> <!-- explainer-text-->
+            <div id="section-title"class="margin-t-xxl">
+                <h4 class="margin-t-xl margin-b-none title"> Dead Through The Years</h4>
+                <p class="hero-text roboto">A timeline of the evolution 
+                    of the Dead's setlist and most played songs by the year. 
                 </p>
             </div>
         </div>
-    </div>
-</div>
-    <div id="timeline-container">
-    </div>            
-    <div id="container">
-      <div class="bubble-fixed fixed-style" >
-        <div class="active-year bold"></div>
-        <svg id="bubbleChart"></svg>
-        <div class="inactive-container">
-        </div>
-        <div class="active-container">
-            <div class="active-title bold"></div>
-            </div>
-        </div>
-      </div> <!-- bubble chart -->
-      <div>
-          <div class="bar-fixed fixed-style">
-              <div class="active-top-ten bold"><span id='bar-year'></span></div>
-              <div id="fixed-radial-tooltip" class="tooltip"></div>
-              <div id="radial-bar"></div>
-          </div>
+        <div id="timeline-container"></div>            
       </div>
-      <div id="sections">
-    </div>
+      <div id="sections"></div>
     </div>
 </div> 
 <script>window.twttr = (function(d, s, id) {

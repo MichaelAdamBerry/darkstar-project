@@ -4,7 +4,6 @@ const careerTotals = require("../data/careerTotals");
 const totalsByYear = require("../data/totalsByYear");
 const helpers = require("./helpers.js");
 
-
 const hunterSongs = [
   "alabama getaway",
   "alligator",
@@ -125,7 +124,6 @@ const barlowSongs = [
   "we can run"
 ];
 
-
 //year should be type string, data totalsByYear
 const getAllSongDataByYear = (year, data) => {
   let temp = data;
@@ -144,8 +142,6 @@ const getLastPlayedDate = song => {
   });
   return found === undefined ? "none" : found.eventDate;
 };
-
-
 
 const getFirstPlayedDate = song => {
   let found = undefined;
@@ -250,36 +246,60 @@ const filterData = song => {
 };
 
 const filterForWriter = () => {
-  let temp = totalsByYear; 
+  let temp = totalsByYear;
   let counted = [];
-  let val = []; 
+  let val = [];
   temp.forEach(obj => {
-    let data = {year: obj.year, hunter: 0, barlow: 0, cover: 0}; 
-    let songs = obj.songs
-    let yearCount = 0
-    let hunter = 0
-    let barlow = 0 
-    let cover = 0
-    songs.forEach(el=> {
+    let data = { year: obj.year, hunter: 0, barlow: 0, cover: 0 };
+    let songs = obj.songs;
+    let yearCount = 0;
+    let hunter = 0;
+    let barlow = 0;
+    let cover = 0;
+    songs.forEach(el => {
       let song = el.name.toLowerCase();
-      yearCount += el.count
-      if (counted.includes(song) === false && song != "space" && song != "drums" && song != "jam" && !song.split(" ").includes("jam")) {
+      yearCount += el.count;
+      if (
+        counted.includes(song) === false &&
+        song != "space" &&
+        song != "drums" &&
+        song != "jam" &&
+        !song.split(" ").includes("jam")
+      ) {
         if (hunterSongs.includes(song)) {
-          hunter += el.count ;
-        }
-        else if (barlowSongs.includes(song)) {
-          barlow += el.count ;
+          hunter += el.count;
+        } else if (barlowSongs.includes(song)) {
+          barlow += el.count;
         } else {
           cover += el.count;
         }
       }
-    })
+    });
     data.hunter = hunter / yearCount;
     data.barlow = barlow / yearCount;
     data.cover = cover / yearCount;
-    val.push(data)
-})
-return val
-}
+    val.push(data);
+  });
+  return val;
+};
 
-console.log(filterForWriter());
+module.exports = {
+  //default is to set singer property to Jerry if Hunter and Weir if Barlow
+  getSongWriters: () => {
+    let data = careerTotals;
+    let songArr = uniqueSongs(data);
+    songArr.forEach(songObj => {
+      songObj.writer = [];
+      songObj.singer = [];
+      let songName = songObj.song.toLowerCase();
+      if (hunterSongs.includes(songName)) {
+        songObj.writer.push("Robert Hunter");
+        songObj.singer.push("Jerry Garcia");
+      } else if (barlowSongs.includes(songName)) {
+        songObj.writer.push("John Perry Barlow");
+        songObj.singer.push("Bob Weir");
+      }
+    });
+    return songArr;
+  }
+};

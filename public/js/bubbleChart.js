@@ -18,13 +18,17 @@ const makeChart = (data, id, year, width, height) => {
   clearBubbleChart();
   clearCareerBubble();
 
+  let currentSkull = d3.select("#career-bubble-chart div.stealie-absolute");
+
+  currentSkull.style("padding-top", "235px");
+
   const colorScale = d3.scaleOrdinal().range(colorsA);
 
   const pack = data =>
     d3
       .pack()
-      .size([150, 150])
-      .padding(10)(d3.hierarchy({ children: data }).sum(d => d.count));
+      .size([160, 160])
+      .padding(3)(d3.hierarchy({ children: data }).sum(d => d.count));
 
   //const shuffledData = d3.shuffle(data);
   const root = pack(data);
@@ -33,31 +37,28 @@ const makeChart = (data, id, year, width, height) => {
   const rootData = root.leaves();
   const extent = d3.extent(data, d => d.count);
 
-  if (year) {
-    const activeYear = d3.select(".active-year").text(`All Songs - ${year}`);
-  }
-
   let selector = id === "bubbleChart" ? "active-title" : "active-title-main";
   const title = d3.select(`.${selector}`);
   let songName = id === "bubbleChart" ? "name" : "song";
-  let tranlateLeafY = id === "bubbleChart" ? 0 : -11;
-  let translateX = id === "bubbleChart" ? 60 : 60;
-  let widthVar = id === "bubbleChart" ? 155 : 300;
-  let heightVar = id === "bubbleChart" ? 200 : 200;
+  let tranlateLeafY = id === "bubbleChart" ? 0 : -56;
+  let translateX = id === "bubbleChart" ? 60 : 7;
+  let widthVar = id === "bubbleChart" ? 155 : 180;
+  let heightVar = id === "bubbleChart" ? 200 : 242;
   let translateSVG = id === "bubbleChart" ? 4 : 4;
+  let translateSVGY = 0;
   let viewBoxX = id === "bubbleChart" ? 60 : 0;
 
   const availWidth = window.screen.availWidth;
 
   if (availWidth <= 425) {
-    widthVar = 168;
-    viewBoxX = 62;
-    translateSVG = translateSVG + 3;
+    //   widthVar = 168;
+    //   viewBoxX = 62;
+    translateSVGY = "350px";
 
-    d3.select(".career-chart-container div.stealie-absolute")
-      .style("max-width", "91%")
-      .style("width", "91%")
-      .style("margin-left", "0");
+    d3.select(".career-chart-container div.stealie-absolute").style(
+      "padding-top",
+      "0"
+    );
   }
 
   const svg = d3.select(`#${id}`);
@@ -69,7 +70,7 @@ const makeChart = (data, id, year, width, height) => {
     //.style("font-size", "12px")
     .attr("font-family", "sans-serif")
     .attr("text-anchor", "middle")
-    .style("transform", `translate(${translateSVG}%, 0)`);
+    .style("transform", `translate(${translateSVG}%, ${translateSVGY})`);
 
   let tooltip = d3
     .select(`body`)
@@ -77,16 +78,6 @@ const makeChart = (data, id, year, width, height) => {
     .attr("class", "tooltip");
 
   const defs = svg.append("defs");
-
-  //Filter for the outside glow
-  var filter = defs.append("filter").attr("id", "glow");
-  filter
-    .append("feGaussianBlur")
-    .attr("stdDeviation", ".3")
-    .attr("result", "coloredBlur");
-  var feMerge = filter.append("feMerge");
-  feMerge.append("feMergeNode").attr("in", "coloredBlur");
-  feMerge.append("feMergeNode").attr("in", "SourceGraphic");
 
   let backgroundGradient = defs
     .append("radialGradient")
@@ -124,9 +115,9 @@ const makeChart = (data, id, year, width, height) => {
   let background = svg
     .append("circle")
     .attr("id", "background-circle")
-    .attr("r", 77)
-    .attr("cx", 139)
-    .attr("cy", 89)
+    .attr("r", 83)
+    .attr("cx", 87)
+    .attr("cy", 137)
     .style("fill", "url(#backgroundGradient)");
 
   //.attr("transform", `translate(${translateX},${tranlateLeafY})`);
@@ -222,86 +213,77 @@ const makeChart = (data, id, year, width, height) => {
   circles.each(setToolTip);
 
   const legend = svg.append("g").attr("class", "legend");
-  const legendPosition = { cx: 8, cy: 0 };
-  let padding = 3;
+  const legendPosition = { cx: 25, cy: -103 };
+  let padding = 10;
   let delay = 15000;
 
   legend.attr("transform", "translate(0, 100)");
 
   legend
-    .append("rect")
-    .attr("width", 50)
-    .attr("height", 28)
-    .attr("x", 0)
-    .attr("y", -6)
-    .style("fill", "var(--site-white)");
-  //.style("box-shadow", "2px 2px 2px var(--site-black)");
-
-  legend
     .append("circle")
     .attr("id", "legend-max")
-    .attr("r", 3.4)
+    .attr("r", 6.09)
     .style("fill", "url(#gradOffset-1)")
     //.style("fill-opacity", ".5")
     .attr(
       "transform",
-      `translate(${legendPosition.cx},${legendPosition.cy + padding})`
+      `translate(${legendPosition.cx + 5},${legendPosition.cy + padding})`
     );
 
   if (id !== "bubbleChart") {
     legend
       .append("circle")
       .attr("id", "legend-min")
-      .attr("r", 1.4)
+      .attr("r", 2.5)
       .style("fill", "url(#gradOffset-1)")
       .attr(
         "transform",
-        `translate(${legendPosition.cx + 26 + padding},${legendPosition.cy +
+        `translate(${legendPosition.cx + 40 + padding},${legendPosition.cy +
           padding})`
       );
 
     legend
       .append("circle")
       .attr("id", "legend-mean")
-      .attr("r", 2.4)
+      .attr("r", 4.45)
       .style("fill", "url(#gradOffset-1")
 
       .attr(
         "transform",
-        `translate(${legendPosition.cx + 13 + padding},${legendPosition.cy +
+        `translate(${legendPosition.cx + 20 + padding},${legendPosition.cy +
           padding})`
       );
   }
 
   legend
     .append("text")
-    .attr("x", `${legendPosition.cx - 6.4 / 2}`)
-    .attr("y", `${legendPosition.cy + 16}`)
+    .attr("x", `${legendPosition.cx}`)
+    .attr("y", `${legendPosition.cy + 31}`)
     .style("text-anchor", "start")
     .attr("fill", "var(--site-black)")
     .text(`600`)
-    .style("font-size", ".3em")
-    .style("font-family", `"Roboto", sans serif`);
+    .style("font-size", "7px")
+    .style("font-family", `"Merriweather", serif`);
 
   legend
     .append("text")
-    .attr("x", `${legendPosition.cx + 20 - 5 * 0.75 + padding - 5}`)
-    .attr("y", `${legendPosition.cy + 16}`)
+    .attr("x", `${legendPosition.cx + 25}`)
+    .attr("y", `${legendPosition.cy + 30}`)
     .style("text-anchor", "start")
     .attr("fill", "var(--site-black)")
     .text(`300`)
-    .style("font-size", ".3em")
-    .style("font-family", `"Roboto", sans serif`);
+    .style("font-size", "7px")
+    .style("font-family", `"Merriweather", serif`);
 
   legend
     .append("text")
-    .attr("x", `${legendPosition.cx + 25 + padding}`)
-    .attr("y", `${legendPosition.cy + 16}`)
+    .attr("x", `${legendPosition.cx + 48}`)
+    .attr("y", `${legendPosition.cy + 30}`)
     .style("text-anchor", "start")
     .attr("fill", "var(--site-black)")
     .text(`100`)
-    .style("font-size", ".3em")
-    .style("font-family", `"Roboto", sans serif`);
+    .style("font-size", "7px")
+    .style("font-family", `"Merriweather", serif`);
 
   legend
     .style("visibility", "hidden")
@@ -316,98 +298,7 @@ const makeChart = (data, id, year, width, height) => {
     .attr("y", 200 + 98)
     .text("Size by amount of plays")
     .style("font-size", ".3em")
-    .attr("class", "bold");
-
-  //annotations per d3-annotations api docs
-  const type = d3.annotationCallout;
-  const annotations = [
-    {
-      note: {
-        label: "",
-        bgPadding: { top: 5, left: 3, right: 5, bottom: 7 },
-        title: "1 Sphere = 1 Song"
-      },
-      //can use x, y directly instead of data
-      x: 65.6,
-      y: 71.5,
-      className: "show-bg",
-
-      dx: -20.8,
-      dy: 5
-    },
-    {
-      note: {
-        label: "to see song history",
-        bgPadding: { top: 5, left: 5, right: 5, bottom: 7 },
-        title: "Select a sphere"
-      },
-      //can use x, y directly instead of data
-
-      className: "show-bg",
-      x: 198,
-      y: 61.4,
-      dx: 39.6,
-      dy: 9
-    }
-  ];
-
-  const makeAnnotations = d3
-    .annotation()
-    .editMode(false)
-    .notePadding(5)
-    .type(type)
-    .annotations(annotations);
-  if (id !== "bubbleChart" && availWidth > 425) {
-    svg
-      .append("g")
-      .attr("class", "annotation-group")
-      .call(makeAnnotations);
-  }
-
-  const titleBgCirc = {
-    r: 25,
-    cx: 255,
-    cy: 155
-  };
-
-  const titleBg = svg.append("g");
-  titleBg
-    .append("circle")
-    .attr("r", titleBgCirc.r)
-    .attr("cx", titleBgCirc.cx)
-    .attr("cy", titleBgCirc.cy)
-    .style("stroke", "var(--site-black)")
-    .style("stroke-opacity", ".4")
-    .style("fill", "var(--p2)")
-    .style("fill-opacity", ".95")
-    .style("box-shadow", "2px 2px 20px var(--site-black)");
-
-  titleBg
-    .append("text")
-    .attr("class", "bold")
-    .attr("x", titleBgCirc.cx - 1)
-    .attr("y", titleBgCirc.cy - 6)
-    .attr("fill", "var(--site-white)")
-    .text("Total Setlist of ")
-    .style("font-size", ".3em");
-
-  titleBg
-    .append("text")
-    .attr("class", "bold")
-    .attr("x", titleBgCirc.cx - 1)
-    .attr("y", titleBgCirc.cy)
-    .attr("fill", "var(--site-white)")
-    .text("Unique Songs Played")
-    .style("font-size", ".3em");
-
-  titleBg
-    .append("text")
-    .attr("class", "bold")
-    .attr("x", titleBgCirc.cx - 3)
-    .attr("y", titleBgCirc.cy + 6)
-    .attr("fill", "var(--site-white)")
-    .text("1965 - 1995")
-    .style("font-size", ".3em");
+    .attr("class", "");
 
   function setToolTip(d) {
     d3.select(this)
