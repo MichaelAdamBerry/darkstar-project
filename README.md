@@ -1,5 +1,7 @@
 ## Darkstar project / GRATEFUL DATA
 
+![Site Hero Illustration](public/images/hero.jpg)
+
 ## What is this?
 
 Grateful Data is a website that uses data visualizations to describe the career arc of the pioneering jam band and psychedelic phenomenon, The Grateful Dead.
