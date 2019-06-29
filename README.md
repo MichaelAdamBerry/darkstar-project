@@ -4,7 +4,7 @@
 
 ## What is this?
 
-Grateful Data is a website that uses data visualizations to describe the career arc of the pioneering jam band and psychedelic phenomenon, The Grateful Dead.
+Grateful Data is a website that uses data visualizations to describe the career arc of the pioneering jam band and psychedelic phenomenon, The Grateful Dead. View the visualizations here - https://grateful-data.com
 
 ### Inspiration
 
@@ -15,6 +15,7 @@ Data Visualization combines the worlds of code, mathematics, design and storytel
 I that started as I was beginning to explore the world of data visualizations with D3 and SVG animations
 
 Experimental work for this project can be seen here at Observable which can offer insight as to most the the methodology in creating the graphs.
+https://observablehq.com/collection/@michaeladamberry/darkstar-project
 
 ### Goals
 
